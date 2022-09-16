@@ -1,12 +1,12 @@
 import axios from "axios";
-import type { NextPage } from "next";
+import type { NextPage, NextPageContext } from "next";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import Header from "../../components/header";
 import Spell from "../../components/spell";
 import SpellModal from "../../components/spellModal";
 import CreateSpellModal from "../../components/createSpellModal";
 import Logo from "../../components/svg/logo";
+import { useEffect, useState } from "react";
 
 interface SpellTip {
   title: string;
@@ -101,12 +101,26 @@ const MyCodex: NextPage = () => {
         <SpellModal id={id} title={title} body={body} imagePaths={imagePaths} favourite={favourite} />
       </div>}
       {createSpell && 
-      <div className="fixed w-full h-full bg-gray-900 bg-opacity-50 opacity-0 flex justify-center items-center hover:opacity-100 duration-500" onClick={() => setCreateSpell(false)}>
+      <div className="fixed w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center duration-500 animate-fade" onClick={() => setCreateSpell(false)}>
         <CreateSpellModal />
       </div>}
     </div>
   )
 }
+
+export const getServerSideProps = async (ctx:NextPageContext) => {
+  // Check if cookie is set, if not set, redirect to login screen
+  if(!ctx.req?.headers.cookie){
+    return {
+      redirect: {
+        destination: "/auth/login"
+      }
+    }
+  }
+  return {
+      props: {},
+  };
+};
 
 export default MyCodex;
 
