@@ -35,6 +35,7 @@ export default (props:SpellModal) => {
   }
 
   const imageHandler = (imagePath:string) => {
+    console.log(imagePath);
     if(imagePath === imageModal){
       setShowImage(!showImage);
     }

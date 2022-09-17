@@ -5,8 +5,8 @@ import Header from "../../components/header";
 import Spell from "../../components/spell";
 import SpellModal from "../../components/spellModal";
 import CreateSpellModal from "../../components/createSpellModal";
-import Logo from "../../components/svg/logo";
 import { useEffect, useState } from "react";
+import LoadingScreen from "../../components/loadingScreen";
 
 interface SpellTip {
   title: string;
@@ -90,12 +90,7 @@ const MyCodex: NextPage = () => {
           </div>
         </div>
       </div>
-      {loading && 
-      <div className="fixed w-full h-full bg-gray-200 bg-opacity-75 duration-500 flex flex-col">
-        <div className="m-auto">
-          <Logo className="w-64 h-64" />
-        </div>
-      </div>}
+      {loading && <LoadingScreen />}
       {isShown && 
       <div className="fixed w-full h-full bg-gray-900 bg-opacity-50 flex flex-row justify-center items-center duration-500 animate-fade" onClick={() => setIsShown(false)}>
         <SpellModal id={id} title={title} body={body} imagePaths={imagePaths} favourite={favourite} />
