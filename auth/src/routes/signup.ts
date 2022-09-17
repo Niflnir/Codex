@@ -17,7 +17,7 @@ router.post('/api/users/signup', [
 ], 
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password} = req.body;
+    const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
 
@@ -25,13 +25,14 @@ router.post('/api/users/signup', [
       throw new BadRequestError('Email is in use. Try again.')
     }
 
-    const user = User.build({ email, password });
+    const username = "";
+    const user = User.build({ email, password, username });
     await user.save();
 
     // Generate JWT
     const userJwt = jwt.sign({
       id: user.id,
-      email: user.email
+      email: user.email,
     }, process.env.JWT_KEY!);
 
     // Store it on session object
