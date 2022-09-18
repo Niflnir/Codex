@@ -70,8 +70,8 @@ module.exports = {
           '100%': {opacity: '1'}
         },
         fade2: {
-          '0%' : {opacity: '0'},
-          '100%': {opacity: '1'}
+          '0%, 100%' : {opacity: '0'},
+          '30%, 70%': {opacity: '1'}
         }
       },
       animation: {
@@ -85,7 +85,7 @@ module.exports = {
         xLogoBlue: 'xLogoBlue 2s ease-in infinite alternate',
         xLogoSaffron: 'xLogoSaffron 2s ease-in infinite alternate',
         fade: 'fade 0.5s ease-in 1',
-        fade2: 'fade2 1s ease-in 1',
+        fade2: 'fade2 1.5s linear 1',
       }
     },
   },

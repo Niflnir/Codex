@@ -1,18 +1,26 @@
 import axios from "axios";
+import postRequest from "../hooks/postRequest";
 import { ChangeEventHandler, useRef, useState } from "react"
 
 export default () => {
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [files, setFiles] = useState<FileList>();
-  const [imagePaths, setImagePaths] = useState<Array<string>>([]);
+  const [errors, setErrors] = useState<React.ReactElement | null>(null);
+  const [errorShown, setErrorShown] = useState<boolean>(false);
   const uploadRef = useRef<HTMLInputElement>(null);
 
   const createSpellHandler = async() => {
     const result = await postImage();
-    setImagePaths(result.imagePaths);
-    await axios({ method:'post', url:'api/spells', data:{'title': title, 'body': body, 'imagePaths': result.imagePaths}})
-    window.location.reload();
+    const response = await postRequest('api/spells', {'title': title, 'body': body, 'imagePaths': result.imagePaths}); 
+    if(response.errors){
+      setErrors(response.errors);
+      setErrorShown(true);
+      setTimeout(() => setErrorShown(false), 1500);
+    }
+    else{
+      window.location.reload();
+    }
   }
 
   const postImage = async () => {
@@ -38,7 +46,7 @@ export default () => {
   }
 
   return (
-    <div className="flex flex-col bg-white py-5 rounded-xl border-[2px] border-saffron text-base space-y-3" onClick={(e) => e.stopPropagation()}>
+    <div className="relative flex flex-col bg-white py-5 rounded-xl border-[2px] border-saffron text-base space-y-3" onClick={(e) => e.stopPropagation()}>
       <div className="pb-2 px-7 text-2xl text-saffron">
         Create Code Tip Spell
       </div>
@@ -59,6 +67,12 @@ export default () => {
       <div className="flex justify-center pt-2">
         <button className="p-2 text-saffron border-[1px] outline-saffron border-saffron rounded-lg hover:bg-saffron hover:text-white transition hover:scale-125" type="submit" onClick={createSpellHandler}>Create Spell</button>
       </div>
+      {errorShown && 
+      <div className="absolute bg-none w-full h-full flex items-center justify-center animate-fade2">
+        <div className="bg-red-400 p-5 rounded-2xl text-white">
+          {errors}
+        </div>
+      </div>}
     </div>
   )
 }

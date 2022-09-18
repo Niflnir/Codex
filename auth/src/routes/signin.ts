@@ -28,7 +28,8 @@ router.post('/api/users/signin',
 
     const passwordsMatch = await Password.compare(existingUser.password, password);
     if(!passwordsMatch){
-      throw new BadRequestError('Invalid credentials')
+      throw Error("wrong password");
+      // throw new BadRequestError('Wrong password')
     }
     // Generate JWT
     const userJwt = jwt.sign({

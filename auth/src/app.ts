@@ -1,4 +1,5 @@
 import express from 'express';
+import 'express-async-errors'; // handles async error, dont delete
 import {json} from 'body-parser';
 import cookieSession from 'cookie-session';
 
