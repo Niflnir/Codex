@@ -10,6 +10,10 @@ router.post('/api/users/username',
     body('email')
       .isEmail()
       .withMessage('Email must be valid'),
+    body('username')
+      .isString()
+      .notEmpty()
+      .withMessage("Username cannot be empty")
   ], 
   validateRequest,
   async (req: Request, res: Response) => {
@@ -23,7 +27,7 @@ router.post('/api/users/username',
     existingUser.set({ "username": username });
     existingUser.save();
 
-    res.status(201).send(existingUser);
+    res.status(201).send(existingUser.username);
   }
 )
 

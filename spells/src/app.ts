@@ -14,6 +14,7 @@ import { deleteFavouritesRouter } from './routes/deleteFavourites';
 import { showSpellFavouritesRouter } from './routes/showSpellFavourites';
 import { uploadImagesRouter } from './routes/upload';
 import { getImagesRouter } from './routes/getImages';
+import { deleteSpellRouter } from './routes/deleteSpell';
 
 const app = express();
 app.set('trust proxy', true);
@@ -28,6 +29,7 @@ app.use(showAllSpellRouter); // get
 app.use(showOneSpellRouter); // get dynamic
 app.use(createSpellRouter); // post
 app.use(updateSpellRouter); // put
+app.use(deleteSpellRouter);
 
 app.use(getImagesRouter); // get dynamic
 app.use(uploadImagesRouter); // post

@@ -22,6 +22,8 @@ export default (props:SpellModal) => {
   const [imagePaths, setImagePaths] = useState<Array<string>>(props.imagePaths);
   const [imageModal, setImageModal] = useState<string>();
   const [showImage, setShowImage] = useState<boolean>(false);
+  const [errors, setErrors] = useState<React.ReactElement | null>(null);
+  const [errorShown, setErrorShown] = useState<boolean>(false);
 
   const favouriteHandler = () => {
     favourite ? axios.delete(`api/favourites/${props.id}`) : axios.post("api/favourites", {id: props.id});
@@ -29,8 +31,15 @@ export default (props:SpellModal) => {
   }
 
   const deleteHandler = async () => {
-    const result = await changeRequest('delete', 'api/spells', {});
-
+    const response = await changeRequest('delete', `api/spells/${props.id}`, {});
+    if(response.errors){
+      setErrors(response.errors);
+      setErrorShown(true);
+      setTimeout(() => setErrorShown(false), 1500);
+    }
+    else{
+      window.location.reload();
+    }
   }
 
   const editHandler = async () => {
@@ -67,7 +76,7 @@ export default (props:SpellModal) => {
         <div title='Favourite' className='absolute right-16 hover:scale-150 duration-150 mx-2 group cursor-pointer' onClick={favouriteHandler}>
           <FavouriteIcon className='w-7 h-7' pathClassName={`${favourite ? "fill-red-500" : "fill-white stroke-gray-900"}`} />
         </div>
-        <div title='Delete' className='absolute right-3 hover:scale-150 duration-150 mx-2 group cursor-pointer' onClick={favouriteHandler}>
+        <div title='Delete' className='absolute right-3 hover:scale-150 duration-150 mx-2 group cursor-pointer' onClick={deleteHandler}>
           <DeleteIcon className='w-6 h-6' pathClassName='fill-saffron' />
         </div>
       </div>
@@ -79,6 +88,12 @@ export default (props:SpellModal) => {
       </div>
     </div>
     {showImage && <img className="w-5/12 h-2/3 pl-12 py-5 animate-fade" src={imageModal} />}
+    {errorShown && 
+    <div className="absolute bg-none w-full h-full flex items-center justify-center animate-fade2">
+      <div className="bg-red-400 p-5 rounded-2xl text-white">
+        {errors}
+      </div>
+    </div>}
     </>
   )
 }
