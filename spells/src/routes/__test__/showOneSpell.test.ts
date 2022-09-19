@@ -6,7 +6,6 @@ it('returns a 404 if the spell is not found', async () => {
   const id = new mongoose.Types.ObjectId().toHexString(); 
   await request(app)
     .get(`/api/spells/${id}`)
-    .send()
     .expect(404);
 })
 
@@ -25,7 +24,7 @@ it('returns the spell if the spell is found', async () => {
 
   const spellResponse = await request(app)
     .get(`/api/spells/${response.body.id}`)
-    .send()
+    .send({})
     .expect(200);
 
   expect(spellResponse.body.title).toEqual(title);

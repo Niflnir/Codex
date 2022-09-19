@@ -25,7 +25,7 @@ router.post('/api/spells', requireAuth, [
     })
     await spell.save();
 
-    res.status(201).send("Spell created successfully");
+    res.status(201).send(spell);
 });
 
 export { router as createSpellRouter }

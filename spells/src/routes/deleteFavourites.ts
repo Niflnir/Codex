@@ -7,7 +7,7 @@ const router = express.Router();
 router.delete('/api/favourites/:id', requireAuth, async (req: Request, res: Response) => {
   const favourite = await Favourites.updateOne({"userId": req.currentUser!.id}, {$pull: {'spells': req.params.id}});
 
-  res.status(201).send(favourite);
+  res.status(200).send(favourite);
 })
 
 export { router as deleteFavouritesRouter };

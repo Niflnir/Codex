@@ -3,6 +3,8 @@ import { useState } from 'react';
 import EditIcon from './svg/editIcon';
 import FavouriteIcon from './svg/favouriteIcon';
 import SaveIcon from './svg/saveIcon';
+import DeleteIcon from './svg/deleteIcon';
+import changeRequest from '../utils/changeRequest';
 
 interface SpellModal {
   id: string,
@@ -26,6 +28,11 @@ export default (props:SpellModal) => {
     setFavourite(!favourite);
   }
 
+  const deleteHandler = async () => {
+    const result = await changeRequest('delete', 'api/spells', {});
+
+  }
+
   const editHandler = async () => {
     if(edit){
       await axios.put(`api/spells/${props.id}`, {"title": title ,"body": body});
@@ -33,6 +40,7 @@ export default (props:SpellModal) => {
     }
     setEdit(!edit);
   }
+
 
   const imageHandler = (imagePath:string) => {
     console.log(imagePath);
@@ -50,14 +58,17 @@ export default (props:SpellModal) => {
     <div className="flex flex-col bg-white w-1/2 rounded-xl border-[1.5px] border-saffron divide-y divide-saffron" onClick={(e) => e.stopPropagation()}>
       <div className="flex flex-row text-xl p-4 relative justify-between items-center">
         {edit ? <textarea value={title} onChange={e => setTitle(e.target.value)} className='outline-gray-300 outline outline-1 focus:outline-saffron w-5/6 h-full p-2 resize-none' rows={1} /> : <textarea value={title} className='bg-transparent resize-none overflow-auto' rows={1} disabled />}
-        <div className='absolute right-16 cursor-pointer' onClick={editHandler}>
+        <div title="Edit" className='absolute right-32 cursor-pointer' onClick={editHandler}>
           {edit ? 
               <SaveIcon className='w-7 h-7 p-0.5 group hover:scale-150 rounded-md duration-150' pathClassName='fill-saffron' />
               : 
               <EditIcon className='w-7 h-7 p-0.5 group hover:scale-150 rounded-md duration-150' pathClassName='fill-saffron' />}
         </div>
-        <div className='hover:scale-150 duration-150 mx-2 group cursor-pointer' onClick={favouriteHandler}>
-          <FavouriteIcon className='w-6 h-6' pathClassName={`${favourite ? "fill-red-500" : "fill-white stroke-gray-900"}`} />
+        <div title='Favourite' className='absolute right-16 hover:scale-150 duration-150 mx-2 group cursor-pointer' onClick={favouriteHandler}>
+          <FavouriteIcon className='w-7 h-7' pathClassName={`${favourite ? "fill-red-500" : "fill-white stroke-gray-900"}`} />
+        </div>
+        <div title='Delete' className='absolute right-3 hover:scale-150 duration-150 mx-2 group cursor-pointer' onClick={favouriteHandler}>
+          <DeleteIcon className='w-6 h-6' pathClassName='fill-saffron' />
         </div>
       </div>
       <div className="p-4 h-2/3">

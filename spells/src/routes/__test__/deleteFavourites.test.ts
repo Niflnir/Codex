@@ -1,21 +1,19 @@
 import request from 'supertest';
 import { app } from '../../app';
 
-it('can fetch a list of spells', async () => {
+it('deletes specified spell', async () => {
   const cookie = global.signin();
+  const id = "123";
   await request(app)
-    .post('/api/spells')
+    .post('/api/favourites')
     .set("Cookie", cookie)
     .send({
-      title: 'first spell',
-      body: 'first spell',
+      id: id
     })
     .expect(201);  
 
-  const response = await request(app)
-    .get('/api/spells')
+  await request(app)
+    .delete(`/api/favourites/${id}`)
     .set("Cookie", cookie)
     .expect(200);
-
-  expect(response.body.length).toEqual(1);
 })

@@ -1,5 +1,5 @@
 import axios from "axios";
-import postRequest from "../hooks/postRequest";
+import changeRequest from "../utils/changeRequest";
 import { ChangeEventHandler, useRef, useState } from "react"
 
 export default () => {
@@ -12,7 +12,7 @@ export default () => {
 
   const createSpellHandler = async() => {
     const result = await postImage();
-    const response = await postRequest('api/spells', {'title': title, 'body': body, 'imagePaths': result.imagePaths}); 
+    const response = await changeRequest('post', 'api/spells', {'title': title, 'body': body, 'imagePaths': result.imagePaths}); 
     if(response.errors){
       setErrors(response.errors);
       setErrorShown(true);

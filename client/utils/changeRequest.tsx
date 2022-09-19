@@ -1,10 +1,10 @@
 import axios from "axios"
 
-const postRequest = async (url: string, body: object) => {
+const changeRequest = async (method:string ,url: string, body: object) => {
   let errors:React.ReactElement | null = null;
   let result = null;
   try{
-    result = await axios.post(url, body);
+    result = await axios({ method: method, url: url, data: body});
     result = result.data;
   } catch (err: any) {
     console.log(err);
@@ -18,7 +18,7 @@ const postRequest = async (url: string, body: object) => {
       </div> 
     );
   }
-  return {"message": "hello", "result": result, "errors": errors};
+  return {"result": result, "errors": errors};
 }
 
-export default postRequest;
+export default changeRequest;
