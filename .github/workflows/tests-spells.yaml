@@ -1,7 +1,9 @@
 name: tests-spells
 
 on:
-  pull_request
+  pull_request:
+    paths:
+      - 'spells/**'
 
 jobs: 
   build:
