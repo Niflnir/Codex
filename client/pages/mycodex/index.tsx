@@ -118,5 +118,3 @@ export const getServerSideProps = async (ctx:NextPageContext) => {
 };
 
 export default MyCodex;
-
-
