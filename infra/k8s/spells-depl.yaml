@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spells-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spells
+  template:
+    metadata:
+      labels: 
+        app: spells
+    spec:
+      containers:
+        - name: spells
+          image: niflnir/spells
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://spells-mongo-srv:27017/spells'
+            - name: JWT_KEY
+              valueFrom: 
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: DO_SPACES_URL
+              valueFrom: 
+                secretKeyRef:
+                  name: do-spaces-url
+                  key: DO_SPACES_URL 
+            - name: DO_SPACES_BUCKET_NAME
+              valueFrom: 
+                secretKeyRef:
+                  name: do-spaces-bucket-name
+                  key: DO_SPACES_BUCKET_NAME
+            - name: DO_SPACES_BUCKET_REGION
+              valueFrom: 
+                secretKeyRef:
+                  name: do-spaces-bucket-region
+                  key: DO_SPACES_BUCKET_REGION
+            - name: DO_SPACES_ACCESS_KEY
+              valueFrom: 
+                secretKeyRef:
+                  name: do-spaces-access-key
+                  key: DO_SPACES_ACCESS_KEY
+            - name: DO_SPACES_SECRET_KEY
+              valueFrom: 
+                secretKeyRef:
+                  name: do-spaces-secret-key
+                  key: DO_SPACES_SECRET_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spells-srv
+spec:
+  selector:
+    app: spells
+  ports:
+    - name: spells
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
