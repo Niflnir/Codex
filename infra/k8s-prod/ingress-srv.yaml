@@ -53,6 +53,7 @@ kind: Service
 metadata:
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
+    service.beta.kubernetes.io/do-loadbalancer-size-unit: "3"
     service.beta.kubernetes.io/do-loadbalancer-hostname: 'www.codex-app.codes'
   labels:
     helm.sh/chart: ingress-nginx-2.0.3
