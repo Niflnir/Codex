@@ -5,8 +5,7 @@ export default ({ req }: NextPageContext) => {
   if (typeof window === 'undefined') {
     // on the server
     return axios.create({
-      // baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
-      baseURL: 'http://www.codex-app.codes',
+      baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
       //@ts-ignore
       headers: req.headers
     });

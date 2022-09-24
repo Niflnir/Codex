@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   rules:
-    - host: ticketing.dev
+    - host: codex.dev
       http:
         paths:
           - path: /api/users/?(.*)
