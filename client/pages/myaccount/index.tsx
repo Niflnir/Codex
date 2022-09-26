@@ -1,5 +1,5 @@
 import axios from "axios";
-import { NextPage } from "next";
+import { NextPage, NextPageContext } from "next";
 import { useEffect, useState } from "react";
 import Header from "../../components/header";
 import LoadingScreen from "../../components/loadingScreen";
@@ -94,5 +94,19 @@ const MyAccount: NextPage = () => {
     </div>
   )
 } 
+
+export const getServerSideProps = async (ctx:NextPageContext) => {
+  // Check if cookie is set, if not set, redirect to login screen
+  if(!ctx.req?.headers.cookie){
+    return {
+      redirect: {
+        destination: "/auth/login"
+      }
+    }
+  }
+  return {
+      props: {},
+  };
+};
 
 export default MyAccount;
