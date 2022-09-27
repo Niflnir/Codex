@@ -7,13 +7,7 @@ import SpellModal from "../../components/spellModal";
 import CreateSpellModal from "../../components/createSpellModal";
 import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/loadingScreen";
-
-interface SpellTip {
-  title: string;
-  body: string;
-  imagePaths?: Array<string>;
-  id: string;
-}
+import { SpellTip } from "../../utils/interfaces";
 
 const MyCodex: NextPage = () => {
   const [isShown, setIsShown] = useState<boolean>(false);

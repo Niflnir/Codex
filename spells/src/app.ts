@@ -15,6 +15,7 @@ import { showSpellFavouritesRouter } from './routes/showSpellFavourites';
 import { uploadImagesRouter } from './routes/upload';
 import { getImagesRouter } from './routes/getImages';
 import { deleteSpellRouter } from './routes/deleteSpell';
+import { showAllUsersSpellsRouter } from './routes/showAllUsersSpells';
 
 const app = express();
 app.set('trust proxy', true);
@@ -26,10 +27,11 @@ app.use( cookieSession({ signed: false,
 app.use(currentUser);
 
 app.use(showAllSpellRouter); // get
+app.use(showAllUsersSpellsRouter) // get
 app.use(showOneSpellRouter); // get dynamic
 app.use(createSpellRouter); // post
 app.use(updateSpellRouter); // put
-app.use(deleteSpellRouter);
+app.use(deleteSpellRouter); // delete
 
 app.use(getImagesRouter); // get dynamic
 app.use(uploadImagesRouter); // post
