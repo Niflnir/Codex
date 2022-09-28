@@ -1,21 +1,21 @@
 import express from 'express';
-import 'express-async-errors';
+import 'express-async-errors'; // do not remove
 import {json} from 'body-parser';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError, currentUser } from '@niftickets/common';
-import { createSpellRouter } from './routes/createSpell';
-import { showAllSpellRouter } from './routes/showAllSpells';
-import { showOneSpellRouter } from './routes/showOneSpell';
-import { updateSpellRouter } from './routes/updateSpell';
-import { favouriteSpellRouter } from './routes/favouriteSpell';
-import { showAllFavouritesRouter } from './routes/showAllFavourites';
-import { checkFavouritesRouter } from './routes/checkFavourites';
-import { deleteFavouritesRouter } from './routes/deleteFavourites';
-import { showSpellFavouritesRouter } from './routes/showSpellFavourites';
+import { createSpellRouter } from './routes/spells/createSpell';
+import { showAllSpellRouter } from './routes/spells/showAllSpells';
+import { showOneSpellRouter } from './routes/spells/showOneSpell';
+import { updateSpellRouter } from './routes/spells/updateSpell';
+import { favouriteSpellRouter } from './routes/favourites/favouriteSpell';
+import { showAllFavouritesRouter } from './routes/favourites/showAllFavourites';
+import { checkFavouritesRouter } from './routes/favourites/checkFavourites';
+import { deleteFavouritesRouter } from './routes/favourites/deleteFavourites';
+import { showSpellFavouritesRouter } from './routes/favourites/showSpellFavourites';
 import { uploadImagesRouter } from './routes/upload';
 import { getImagesRouter } from './routes/getImages';
-import { deleteSpellRouter } from './routes/deleteSpell';
-import { showAllUsersSpellsRouter } from './routes/showAllUsersSpells';
+import { deleteSpellRouter } from './routes/spells/deleteSpell';
+import { showAllUsersSpellsRouter } from './routes/spells/showAllUsersSpells';
 
 const app = express();
 app.set('trust proxy', true);

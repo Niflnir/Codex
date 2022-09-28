@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from '../../app';
+import { app } from '../../../app';
 
 it('can fetch a list of spells', async () => {
   const cookie = global.signin();

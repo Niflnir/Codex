@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
-import { app } from '../../app';
-import { Spell } from '../../models/spell';
+import { app } from '../../../app';
 
 it('returns a 401 if the user is not authenticated ', async () => {
   await request(app)

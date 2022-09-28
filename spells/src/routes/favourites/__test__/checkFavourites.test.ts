@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from '../../app';
+import { app } from '../../../app';
 
 it('has a route handler listening to /api/favourites for post request', async() => {
   const response = await request(app)

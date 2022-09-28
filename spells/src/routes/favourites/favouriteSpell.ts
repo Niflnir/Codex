@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { requireAuth } from '@niftickets/common';
-import { Favourites } from '../models/favourites';
+import { Favourites } from '../../models/favourites';
 
 const router = express.Router();
 

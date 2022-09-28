@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Spell } from '../models/spell';
+import { Spell } from '../../models/spell';
 import { NotFoundError } from '@niftickets/common';
 
 const router = express.Router();

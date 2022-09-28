@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { NotAuthorizedError, NotFoundError, requireAuth, validateRequest } from '@niftickets/common';
-import { Spell } from '../models/spell';
+import { Spell } from '../../models/spell';
 
 const router = express.Router();
 
