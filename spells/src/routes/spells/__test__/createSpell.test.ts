@@ -1,6 +1,6 @@
 import request from 'supertest';
-import { app } from '../../app';
-import { Spell } from '../../models/spell';
+import { app } from '../../../app';
+import { Spell } from '../../../models/spell';
 
 it('has a route handler listening to /api/spells for post request', async() => {
   const response = await request(app)

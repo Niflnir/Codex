@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { requireAuth, validateRequest } from '@niftickets/common';
-import { Spell } from '../models/spell';
+import { Spell } from '../../models/spell';
 
 const router = express.Router();
 

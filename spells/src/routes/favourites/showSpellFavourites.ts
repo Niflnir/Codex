@@ -1,6 +1,6 @@
 import { requireAuth } from '@niftickets/common';
 import express, { Request, Response } from 'express';
-import { Spell } from '../models/spell';
+import { Spell } from '../../models/spell';
 
 const router = express.Router();
 
