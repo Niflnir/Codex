@@ -4,6 +4,7 @@ import { Spell } from '../../models/spell';
 
 const router = express.Router();
 
+// sends back a list favourited spells
 router.post('/api/favourites/spells', requireAuth, async (req: Request, res: Response) => {
   if(req.body.spells && req.body.spells.length){
     const spells = await Spell.find({"_id": { $in : req.body.spells}});
