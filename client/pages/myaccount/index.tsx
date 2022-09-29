@@ -7,15 +7,20 @@ import EditIcon from "../../components/svg/editIcon";
 import SaveIcon from "../../components/svg/saveIcon";
 import changeRequest from "../../utils/changeRequest";
 
+import { setLoadingState } from "../../redux/loadingSlice";
+import { useDispatch } from "react-redux";
+
 const MyAccount: NextPage = () => {
-  const [loading, setLoading] = useState<boolean>(true);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [edit, setEdit] = useState<boolean>(false);
+  
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getEmail();
-    setTimeout(() => setLoading(false), 1500);
+    dispatch(setLoadingState(true));
+    setTimeout(() => dispatch(setLoadingState(false)), 1500);
   }, [])
 
   const getEmail = async () => {
@@ -90,7 +95,7 @@ const MyAccount: NextPage = () => {
           </div>
         </div>
       </div>
-      {loading && <LoadingScreen />}
+      <LoadingScreen />
     </div>
   )
 } 

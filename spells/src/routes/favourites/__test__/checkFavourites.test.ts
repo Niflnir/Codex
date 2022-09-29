@@ -1,17 +1,19 @@
 import request from 'supertest';
 import { app } from '../../../app';
 
-it('has a route handler listening to /api/favourites for post request', async() => {
-  const response = await request(app)
+it('it returns the spell if it has been favourited', async() => {
+  const cookie = global.signin();
+  const spell = await request(app)
     .post('/api/spells')
-    .send({});
+    .set('Cookie', cookie)
+    .send({
+      title: 'hello',
+      body: 'hello'
+    })
+    .expect(201);
 
-  expect(response.status).not.toEqual(404);
-})
-
-it('returns a list of favourites', async() => {
-  const response = await request(app)
-    .post('/api/favourites')
-    .set("Cookie", global.signin())
-    .send({id: "123"})
+  await request(app)
+    .get('/api/favourites')
+    .set("Cookie", cookie)
+    .expect(201)
 })

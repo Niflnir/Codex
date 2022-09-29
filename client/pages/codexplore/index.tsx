@@ -7,20 +7,24 @@ import Spell from "../../components/spell";
 import changeRequest from "../../utils/changeRequest";
 import { SpellTip } from "../../utils/interfaces";
 
+import { setLoadingState } from "../../redux/loadingSlice";
+import { useDispatch } from "react-redux";
+
 const Codexplore: NextPage = () => {
-  const [loading, setLoading] = useState<boolean>(true);
   const [spells, setSpells] = useState<Array<SpellTip>>([]);
   const [isShown, setIsShown] = useState<boolean>(false);
   const [id, setId] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [imagePaths, setImagePaths] = useState<Array<string>>([]);
-
   const [favourite, setFavourite] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getSpells();
-    setTimeout(() => setLoading(false), 1500);
+    dispatch(setLoadingState(true));
+    setTimeout(() => dispatch(setLoadingState(false)), 1500);
   }, [])
 
   const getSpells = async() => {
@@ -53,12 +57,12 @@ const Codexplore: NextPage = () => {
               <button className="btn-mycodex-blue mt-10">Favourites</button>
             </div>
             <div className="flex flex-col w-full text-xs md:text-base">
-              {!loading && spells.map(spell => <Spell handler={() => showSpellHandler(spell)} key={spell.id} id={spell.id} title={spell.title} />)}
+              {spells.map(spell => <Spell handler={() => showSpellHandler(spell)} key={spell.id} id={spell.id} title={spell.title} />)}
             </div>
           </div>
         </div>
       </div>
-      {loading && <LoadingScreen />}
+      <LoadingScreen />
     </div>
   )
 } 

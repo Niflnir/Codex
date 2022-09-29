@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/loadingScreen";
 import { SpellTip } from "../../utils/interfaces";
 
+import { setLoadingState } from "../../redux/loadingSlice";
+import { useDispatch } from "react-redux";
+
 const MyCodex: NextPage = () => {
   const [isShown, setIsShown] = useState<boolean>(false);
 
@@ -18,9 +21,9 @@ const MyCodex: NextPage = () => {
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [imagePaths, setImagePaths] = useState<Array<string>>([]);
-
   const [favourite, setFavourite] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
   
   useEffect(() => {
     mySpellsHandler();
@@ -28,17 +31,17 @@ const MyCodex: NextPage = () => {
 
   const mySpellsHandler = async () => {
     try{
-      setLoading(true);
+      dispatch(setLoadingState(true));
       const response = await axios.get('api/spells');
       setSpells(response.data);
-      setTimeout(() => setLoading(false), 1500);
+      setTimeout(() => dispatch(setLoadingState(false)), 1500);
     } catch(err){
       console.log(err);
     }
   }
   
   const favouritesHandler = async () => {
-    setLoading(true);
+    dispatch(setLoadingState(true));
     // get array of ids of favourited spells
     const response = await axios.get('api/favourites');
     // get spell data based on ids
@@ -49,7 +52,7 @@ const MyCodex: NextPage = () => {
     else{
       setSpells([]);
     }
-    setTimeout(() => setLoading(false), 1000);
+    setTimeout(() => dispatch(setLoadingState(false)), 1500);
   }
 
   const showSpellHandler = async (spell: SpellTip) => {
@@ -79,12 +82,12 @@ const MyCodex: NextPage = () => {
               <button onClick={() => setCreateSpell(true)} className="btn-mycodex-saffron mt-96 mb-4">Create Spell</button>
             </div>
             <div className="flex flex-col w-full text-xs md:text-base">
-              {!loading && spells.map(spell => <Spell handler={() => showSpellHandler(spell)} key={spell.id} id={spell.id} title={spell.title} />)}
+              {spells.map(spell => <Spell handler={() => showSpellHandler(spell)} key={spell.id} id={spell.id} title={spell.title} />)}
             </div>
           </div>
         </div>
       </div>
-      {loading && <LoadingScreen />}
+      <LoadingScreen />
       {isShown && 
       <div className="fixed w-full h-full bg-gray-900 bg-opacity-50 flex flex-row justify-center items-center duration-500 animate-fade" onClick={() => setIsShown(false)}>
         <SpellModal id={id} title={title} body={body} imagePaths={imagePaths} favourite={favourite} />
