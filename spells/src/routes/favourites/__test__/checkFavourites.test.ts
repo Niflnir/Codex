@@ -15,5 +15,5 @@ it('it returns the spell if it has been favourited', async() => {
   await request(app)
     .get('/api/favourites')
     .set("Cookie", cookie)
-    .expect(201)
+    .expect(200)
 })
