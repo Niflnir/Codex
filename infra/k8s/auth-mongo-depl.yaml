@@ -1,12 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: auth-mongo-depl
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: auth-mongo
+  serviceName: auth-mongo-srv
+  replicas: 1
   template:
     metadata:
       labels:
@@ -15,12 +16,23 @@ spec:
       containers:
         - name: auth-mongo
           image: mongo
+          volumeMounts:
+            - name: mongodb-data
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: mongodb-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: auth-mongo-srv
-spec: 
+spec:
   selector:
     app: auth-mongo
   ports:
