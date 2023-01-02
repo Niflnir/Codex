@@ -13,17 +13,13 @@ import { setLoadingState } from "../../redux/loadingSlice";
 import { useDispatch } from "react-redux";
 
 const MyCodex: NextPage = () => {
-  const [isShown, setIsShown] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
+  const [isShown, setIsShown] = useState<boolean>(false);
   const [createSpell, setCreateSpell] = useState<boolean>(false);
   const [spells, setSpells] = useState<Array<SpellTip>>([]);
-  const [id, setId] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
-  const [body, setBody] = useState<string>("");
-  const [imagePaths, setImagePaths] = useState<Array<string>>([]);
+  const [currentSpell, setCurrentSpell] = useState<SpellTip>({} as SpellTip);
   const [favourite, setFavourite] = useState<boolean>(false);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     mySpellsHandler();
@@ -53,15 +49,17 @@ const MyCodex: NextPage = () => {
     } else {
       setSpells([]);
     }
-    setTimeout(() => dispatch(setLoadingState(false)), 1500);
+    setTimeout(() => dispatch(setLoadingState(false)), 1000);
   };
 
   const showSpellHandler = async (spell: SpellTip) => {
     const response = await axios.get(`api/favourites/${spell.id}`);
-    setTitle(spell.title);
-    setBody(spell.body);
-    spell.imagePaths && setImagePaths(spell.imagePaths);
-    setId(spell.id);
+    setCurrentSpell({
+      id: spell.id,
+      title: spell.title,
+      body: spell.body,
+      imagePaths: spell.imagePaths,
+    });
     setFavourite(!!response.data.length);
     setIsShown(true);
   };
@@ -120,13 +118,7 @@ const MyCodex: NextPage = () => {
           className="fixed w-full h-full bg-gray-900 bg-opacity-50 flex flex-row justify-center items-center duration-500 animate-fade"
           onClick={() => setIsShown(false)}
         >
-          <SpellModal
-            id={id}
-            title={title}
-            body={body}
-            imagePaths={imagePaths}
-            favourite={favourite}
-          />
+          <SpellModal spell={currentSpell} favourite={favourite} />
         </div>
       )}
       {createSpell && (
