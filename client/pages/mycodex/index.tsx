@@ -5,17 +5,20 @@ import Header from "../../components/header";
 import Spell from "../../components/spell";
 import SpellModal from "../../components/spellModal";
 import CreateSpellModal from "../../components/createSpellModal";
-import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/loadingScreen";
+import { useEffect, useState } from "react";
 import { SpellTip } from "../../utils/interfaces";
-
 import { setLoadingState } from "../../redux/loadingSlice";
 import { useDispatch } from "react-redux";
+
+const getSpellsURL = "api/spells";
+const getFavouritesURL = "api/favourites";
+const getFavouriteSpellsURL = "api/favourites/spells";
 
 const MyCodex: NextPage = () => {
   const dispatch = useDispatch();
 
-  const [isShown, setIsShown] = useState<boolean>(false);
+  const [showSpell, setShowSpell] = useState<boolean>(false);
   const [createSpell, setCreateSpell] = useState<boolean>(false);
   const [spells, setSpells] = useState<Array<SpellTip>>([]);
   const [currentSpell, setCurrentSpell] = useState<SpellTip>({} as SpellTip);
@@ -28,21 +31,21 @@ const MyCodex: NextPage = () => {
   const mySpellsHandler = async () => {
     try {
       dispatch(setLoadingState(true));
-      const response = await axios.get("api/spells");
+      const response = await axios.get(getSpellsURL);
       setSpells(response.data);
-      setTimeout(() => dispatch(setLoadingState(false)), 1500);
     } catch (err) {
       console.log(err);
     }
+    setTimeout(() => dispatch(setLoadingState(false)), 1000);
   };
 
   const favouritesHandler = async () => {
     dispatch(setLoadingState(true));
     // get array of ids of favourited spells
-    const response = await axios.get("api/favourites");
+    const response = await axios.get(getFavouritesURL);
     // get spell data based on ids
     if (response.data.length) {
-      const res = await axios.post("api/favourites/spells", {
+      const res = await axios.post(getFavouriteSpellsURL, {
         spells: response.data[0].spells,
       });
       setSpells(res.data);
@@ -61,11 +64,11 @@ const MyCodex: NextPage = () => {
       imagePaths: spell.imagePaths,
     });
     setFavourite(!!response.data.length);
-    setIsShown(true);
+    setShowSpell(true);
   };
 
   return (
-    <div className="flex flex-col relative min-h-screen bg-blue font-pd items-center min-w-[700px]">
+    <div className="flex-col-center relative min-h-screen bg-blue font-pd min-w-[700px]">
       <Header screen="mycodex" />
       <div className="flex flex-grow min-w-full items-center justify-center h-full">
         <div className="bg-white flex flex-col rounded-xl divide-y divide-gray-300 w-3/4">
@@ -81,7 +84,7 @@ const MyCodex: NextPage = () => {
             </div>
           </div>
           <div className="flex flex-row divide-x divide-gray-300">
-            <div className="flex flex-col items-center pt-6 text-xs min-w-[160px] md:min-w-[210px] md:text-base">
+            <div className="flex-col-center pt-6 text-xs min-w-[160px] md:min-w-[210px] md:text-base">
               <button onClick={mySpellsHandler} className="btn-mycodex-blue">
                 My Spells
               </button>
@@ -113,19 +116,13 @@ const MyCodex: NextPage = () => {
         </div>
       </div>
       <LoadingScreen />
-      {isShown && (
-        <div
-          className="fixed w-full h-full bg-gray-900 bg-opacity-50 flex flex-row justify-center items-center duration-500 animate-fade"
-          onClick={() => setIsShown(false)}
-        >
+      {showSpell && (
+        <div className="modal-base" onClick={() => setShowSpell(false)}>
           <SpellModal spell={currentSpell} favourite={favourite} />
         </div>
       )}
       {createSpell && (
-        <div
-          className="fixed w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center duration-500 animate-fade"
-          onClick={() => setCreateSpell(false)}
-        >
+        <div className="modal-base" onClick={() => setCreateSpell(false)}>
           <CreateSpellModal />
         </div>
       )}

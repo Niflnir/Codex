@@ -7,7 +7,7 @@ const makeStore = () =>
   configureStore({
     reducer: {
       [authSlice.name]: authSlice.reducer,
-      [loadingSlice.name] : loadingSlice.reducer,
+      [loadingSlice.name]: loadingSlice.reducer,
     },
     devTools: true,
   });
