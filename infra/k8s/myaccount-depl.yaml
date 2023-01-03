@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myaccount-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myaccount
+  template:
+    metadata:
+      labels:
+        app: myaccount
+    spec:
+      containers:
+        - name: myaccount
+          image: niflnir/myaccount
+          env:
+            - name: MONGO_URI
+              value: "mongodb://auth-mongo-srv:27017/myaccount"
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myaccount-srv
+spec:
+  selector:
+    app: myaccount
+  ports:
+    - name: myaccount
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

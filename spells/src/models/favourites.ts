@@ -4,19 +4,19 @@ interface Spell {
   id: string,
 }
 
-interface FavouritesAttrs{
+interface FavouritesAttrs {
   userId: string;
   spells: Array<Spell>;
 }
 
-interface FavouritesDoc extends mongoose.Document{
+interface FavouritesDoc extends mongoose.Document {
   userId: string;
   spells: Array<Spell>;
 }
 
-interface FavouritesModel extends mongoose.Model<FavouritesDoc>{
+interface FavouritesModel extends mongoose.Model<FavouritesDoc> {
   build(attrs: FavouritesAttrs): FavouritesDoc;
-} 
+}
 
 const favouritesSchema = new mongoose.Schema({
   userId: {
@@ -27,9 +27,9 @@ const favouritesSchema = new mongoose.Schema({
     type: [{ type: String }],
     required: false
   },
-},{
+}, {
   toJSON: {
-    transform(_, ret){
+    transform(_, ret) {
       ret.id = ret._id;
       delete ret._id;
     }

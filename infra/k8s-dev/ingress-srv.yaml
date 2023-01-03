@@ -40,6 +40,13 @@ spec:
                 name: spells-srv
                 port:
                   number: 3000
+          - path: /api/myaccount/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: myaccount-srv
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:
