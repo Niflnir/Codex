@@ -17,4 +17,10 @@
   .btn-mycodex-saffron {
     @apply bg-white px-5 py-2 w-5/6 rounded-3xl text-saffron outline outline-1 outline-saffron hover:bg-saffron hover:text-white duration-300 hover:animate-wiggle;
   }
+  .modal-base {
+    @apply fixed w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center duration-500 animate-fade;
+  }
+  .flex-col-center {
+    @apply flex flex-col items-center;
+  }
 }
