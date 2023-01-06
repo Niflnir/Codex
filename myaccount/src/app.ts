@@ -3,7 +3,8 @@ import "express-async-errors"; // do not remove
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
 import { errorHandler, NotFoundError, currentUser } from "@niftickets/common";
-import { currentUserRouter } from "./routes/currentUser";
+import { getProfileRouter } from "./routes/getProfile";
+import { editProfileRouter } from "./routes/editProfile";
 
 const app = express();
 app.set("trust proxy", true);
@@ -14,6 +15,9 @@ app.use(
 app.use(currentUser);
 
 app.use(currentUserRouter); // delete
+
+app.use(getProfileRouter); // get
+app.use(editProfileRouter); // post
 
 app.all("*", async (req, res) => {
   throw new NotFoundError();
