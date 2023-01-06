@@ -1,38 +1,32 @@
 import mongoose from "mongoose";
 
 // An interface that describes the properties
-// that are required to make a new User
-interface UserAttrs {
-  email: string;
-  username: string;
+// that are required to make a new Profile
+interface ProfileAttrs {
+  userId: string;
   description: string;
   picture: string;
 }
 
 // An interface that describes the properties
-// that a User Model has
-interface UserModel extends mongoose.Model<UserDoc> {
-  build(attrs: UserAttrs): UserDoc;
+// that a Profile Model has
+interface ProfileModel extends mongoose.Model<ProfileDoc> {
+  build(attrs: ProfileAttrs): ProfileDoc;
 }
 
 // An interface that describes the properties
-// that a User Model has
-interface UserDoc extends mongoose.Document {
-  email: string;
-  username: string;
+// that a Profile Model has
+interface ProfileDoc extends mongoose.Document {
+  userId: string;
   description: string;
   picture: string;
 }
 
 const userSchema = new mongoose.Schema(
   {
-    email: {
+    userId: {
       type: String,
       required: true,
-    },
-    username: {
-      type: String,
-      required: false,
     },
     description: {
       type: String,
@@ -41,7 +35,7 @@ const userSchema = new mongoose.Schema(
     picture: {
       type: String,
       required: false,
-    }
+    },
   },
   {
     toJSON: {
@@ -54,10 +48,10 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.statics.build = (attrs: UserAttrs) => {
-  return new User(attrs);
+userSchema.statics.build = (attrs: ProfileAttrs) => {
+  return new Profile(attrs);
 };
 
-const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
+const Profile = mongoose.model<ProfileDoc, ProfileModel>("Profile", userSchema);
 
-export { User };
+export { Profile };
