@@ -14,8 +14,6 @@ app.use(
 );
 app.use(currentUser);
 
-app.use(currentUserRouter); // delete
-
 app.use(getProfileRouter); // get
 app.use(editProfileRouter); // post
 

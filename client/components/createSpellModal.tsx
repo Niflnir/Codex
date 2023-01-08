@@ -57,9 +57,7 @@ export default () => {
       className="relative flex flex-col bg-white py-5 rounded-xl border-[2px] border-saffron text-base space-y-3"
       onClick={(e) => e.stopPropagation()}
     >
-      <div className="pb-2 px-7 text-2xl text-saffron">
-        Create Code Tip Spell
-      </div>
+      <div className="pb-2 px-7 text-2xl text-saffron">Create Code Spell</div>
       <hr className="border-saffron" />
       <div className="flex px-7 pt-1 flex-col space-y-2">
         <label>Title:</label>

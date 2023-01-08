@@ -40,6 +40,13 @@ spec:
                 name: spells-srv
                 port:
                   number: 3000
+          - path: /api/myaccount/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: myaccount-srv
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:
@@ -52,9 +59,9 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
+    service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
     service.beta.kubernetes.io/do-loadbalancer-size-unit: "3"
-    service.beta.kubernetes.io/do-loadbalancer-hostname: 'www.codex-app.codes'
+    service.beta.kubernetes.io/do-loadbalancer-hostname: "www.codex-app.codes"
   labels:
     helm.sh/chart: ingress-nginx-2.0.3
     app.kubernetes.io/name: ingress-nginx
