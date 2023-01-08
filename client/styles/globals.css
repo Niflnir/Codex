@@ -23,4 +23,7 @@
   .flex-col-center {
     @apply flex flex-col items-center;
   }
+  .icon-base {
+    @apply p-0.5 hover:scale-150 rounded-md duration-150;
+  }
 }

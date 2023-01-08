@@ -1,4 +1,4 @@
-import { NotFoundError, requireAuth } from "@niftickets/common";
+import { requireAuth } from "@niftickets/common";
 import express, { Request, Response } from "express";
 import { Profile } from "../models/profile";
 
@@ -20,7 +20,6 @@ router.get(
       await newProfile.save();
       res.status(200).send(newProfile);
     }
-    throw new NotFoundError();
   }
 );
 
