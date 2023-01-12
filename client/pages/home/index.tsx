@@ -6,7 +6,7 @@ import HomeIcon from "../../components/svg/homeIcon";
 import HomeModal from "../../components/home/HomeModal";
 import Router from "next/router";
 import Header from "../../components/header";
-import Sidebar from "../../components/sidebar";
+import Sidebar from "../../components/Sidebar";
 
 const Home: NextPage = () => {
   return (
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         What Would You Like To Do?
       </div>
       <Header
-        icon={<HomeIcon className="w-6 h-6" pathClassName="" />}
+        icon={<HomeIcon className="w-7 h-7" pathClassName="fill-sec" />}
         title="HOME"
       />
       <div className="space-y-32">
