@@ -52,8 +52,8 @@ export default () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-row mx-16 mt-20 mb-2 text-xl text-saffron tracking-wider space-x-2">
+    <div className="flex flex-col mr-6">
+      <div className="flex flex-row mx-20 mt-20 mb-2 text-xl text-saffron tracking-wider space-x-2">
         <div>Username</div>
         <div className="cursor-pointer mt-0.5" onClick={editHandler}>
           {edit ? (
@@ -69,7 +69,7 @@ export default () => {
           )}
         </div>
       </div>
-      <div className="mx-16">
+      <div className="mx-20">
         {edit ? (
           <textarea
             value={username}
@@ -81,10 +81,10 @@ export default () => {
           username
         )}
       </div>
-      <div className="mx-16 mt-24 mb-2 text-xl text-saffron tracking-wider">
+      <div className="mx-20 mt-24 mb-2 text-xl text-saffron tracking-wider">
         Email
       </div>
-      <div className="mx-16">{email}</div>
+      <div className="mx-20">{email}</div>
     </div>
   );
 };

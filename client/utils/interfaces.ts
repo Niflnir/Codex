@@ -5,3 +5,8 @@ export interface SpellTip {
   imagePaths?: Array<string>;
   id: string;
 }
+
+export interface IconProps {
+  className: string;
+  pathClassName: string;
+}

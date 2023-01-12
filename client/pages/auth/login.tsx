@@ -6,7 +6,7 @@ import Logo from "../../public/images/Logo.png";
 import useRequest from "../../hooks/use-request";
 import Router from "next/router";
 
-const Login: NextPage = () => {
+const LoginPage: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { doRequest, errors } = useRequest({
@@ -21,7 +21,6 @@ const Login: NextPage = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     doRequest();
   };
 
@@ -85,4 +84,4 @@ const Login: NextPage = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

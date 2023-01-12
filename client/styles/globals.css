@@ -3,8 +3,13 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "PD";
-  src: url("../public/fonts/PlayfairDisplay-Regular.otf");
+  font-family: "MG";
+  src: url("../public/fonts/Megrim 500.ttf");
+}
+
+@font-face {
+  font-family: "MG";
+  src: url("../public/fonts/Megrim 500.ttf");
 }
 
 @layer components {

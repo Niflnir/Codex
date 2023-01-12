@@ -16,7 +16,7 @@ const SignUp: NextPage = () => {
       email,
       password,
     },
-    onSuccess: () => Router.push("/auth/login"),
+    onSuccess: () => Router.push("/login"),
   });
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

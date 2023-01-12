@@ -1,7 +1,6 @@
 import axios from "axios";
 import type { NextPage, NextPageContext } from "next";
 import Image from "next/image";
-import Header from "../../components/header";
 import Spell from "../../components/spell";
 import SpellModal from "../../components/spellModal";
 import CreateSpellModal from "../../components/createSpellModal";
@@ -10,6 +9,7 @@ import { useEffect, useState } from "react";
 import { SpellTip } from "../../utils/interfaces";
 import { setLoadingState } from "../../redux/loadingSlice";
 import { useDispatch } from "react-redux";
+import buildClient from "../../api/build-client";
 
 const getSpellsURL = "api/spells";
 const getFavouritesURL = "api/favourites";
@@ -69,7 +69,6 @@ const MyCodex: NextPage = () => {
 
   return (
     <div className="flex-col-center relative min-h-screen bg-blue font-pd min-w-[700px]">
-      <Header screen="mycodex" />
       <div className="flex flex-grow min-w-full items-center justify-center h-full">
         <div className="bg-white flex flex-col rounded-xl divide-y divide-gray-300 w-3/4">
           <div className="p-2 flex flex-row mx-4 mt-2 mb-1">
@@ -130,7 +129,7 @@ const MyCodex: NextPage = () => {
   );
 };
 
-export const getServerSideProps = async (ctx: NextPageContext) => {
+MyCodex.getInitialProps = async (ctx: NextPageContext) => {
   // Check if cookie is set, if not set, redirect to login screen
   if (!ctx.req?.headers.cookie) {
     return {
@@ -139,9 +138,9 @@ export const getServerSideProps = async (ctx: NextPageContext) => {
       },
     };
   }
-  return {
-    props: {},
-  };
+  const client = buildClient(ctx);
+  const { data } = await client.get("/api/users/currentuser");
+  return data;
 };
 
 export default MyCodex;
