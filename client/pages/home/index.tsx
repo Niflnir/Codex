@@ -11,15 +11,15 @@ import Sidebar from "../../components/Sidebar";
 const Home: NextPage = () => {
   return (
     <div className="flex-col-center pb-32 relative min-h-screen bg-black font-mg min-w-[700px]">
+      <Header
+        icon={<HomeIcon className="w-7 h-7" pathClassName="fill-sec" />}
+        title="HOME"
+      />
       <Sidebar />
       <div className="flex fixed opacity-30 w-full h-screen bg-center bg-cover bg-gh"></div>
       <div className="text-3xl text-saffron mt-28 mb-16">
         What Would You Like To Do?
       </div>
-      <Header
-        icon={<HomeIcon className="w-7 h-7" pathClassName="fill-sec" />}
-        title="HOME"
-      />
       <div className="space-y-32">
         <HomeModal
           title="Creation"
