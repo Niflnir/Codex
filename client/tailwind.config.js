@@ -29,6 +29,8 @@ module.exports = {
       },
       maxHeight: {
         128: "32rem",
+        144: "36rem",
+        160: "40rem",
       },
       backgroundImage: {
         "split-bg": "linear-gradient(to right, #166095 50%, #DEB992 50%)",
