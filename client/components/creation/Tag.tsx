@@ -5,6 +5,9 @@ interface TagProps {
   tag: string;
   tags: string[];
   setTags: Dispatch<SetStateAction<string[]>>;
+  enableDelete: boolean;
+  colour: string;
+  fontSize: string;
 }
 
 const Tag = (props: TagProps) => {
@@ -14,16 +17,18 @@ const Tag = (props: TagProps) => {
   };
   return (
     <div
-      className="flex bg-black border border-sec rounded-lg px-2 font-sc text-sec text-md space-x-1 items-center uppercase"
+      className={`flex bg-black border border-${props.colour} rounded-lg px-2 font-sc text-${props.colour} text-${props.fontSize} space-x-1 items-center uppercase`}
       key={props.tag}
     >
       <div>{props.tag}</div>
-      <div className="group" onClick={deleteHandler}>
-        <XIcon
-          className="w-4 h-4 cursor-pointer"
-          pathClassName="group-hover:stroke-saffron"
-        />
-      </div>
+      {props.enableDelete && (
+        <div className="group" onClick={deleteHandler}>
+          <XIcon
+            className={`w-4 h-4 cursor-pointer`}
+            pathClassName="group-hover:stroke-saffron"
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { NextPage, NextPageContext } from "next";
 import CreationPhoto from "../../public/images/creationPhoto.jpg";
 import CodexPhoto from "../../public/images/sunset.jpg";
 import ExplorePhoto from "../../public/images/exploree.jpg";
@@ -44,18 +44,18 @@ const Home: NextPage = () => {
   );
 };
 
-// Home.getInitialProps = async (ctx: NextPageContext) => {
-//   // Check if cookie is set, if not set, redirect to login screen
-//   if (!ctx.req?.headers.cookie) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//       },
-//     };
-//   }
-//   const client = buildClient(ctx);
-//   const { data } = await client.get("/api/users/currentuser");
-//   return data;
-// };
+export const getServerSideProps = async (ctx: NextPageContext) => {
+  // Check if cookie is set, if not set, redirect to login screen
+  if (!ctx.req?.headers.cookie) {
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+};
 
 export default Home;

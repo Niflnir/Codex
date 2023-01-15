@@ -29,6 +29,7 @@ const AddTag = (props: AddTagProps) => {
       {edit ? (
         <div className="flex rounded-lg border border-sec bg-black px-2 w-28 font-sc overflow-hidden space-x-2">
           <input
+            maxLength={15}
             value={value}
             className="bg-black outline-none w-5/6"
             onChange={(e) => setValue(e.target.value)}
@@ -42,7 +43,7 @@ const AddTag = (props: AddTagProps) => {
             }}
           >
             <XIcon
-              className="w-4 h-5 mt-1 cursor-pointer"
+              className="w-4 h-5 mt-1.5 cursor-pointer"
               pathClassName="group-hover:stroke-saffron"
             />
           </div>

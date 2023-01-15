@@ -14,7 +14,7 @@ export default (props: IconProps) => {
         x2="6.48008"
         y2="1.11608"
         stroke="#758F8B"
-        stroke-width="0.5"
+        strokeWidth="0.5"
       />
       <line
         className={props.pathClassName}
@@ -23,7 +23,7 @@ export default (props: IconProps) => {
         x2="0.823107"
         y2="1.17666"
         stroke="#758F8B"
-        stroke-width="0.5"
+        strokeWidth="0.5"
       />
     </svg>
   );

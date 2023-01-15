@@ -14,7 +14,7 @@ import { loginRouter } from "./routes/auth/login";
 import { showAllSpellRouter } from "./routes/spells/spells/showAllSpells";
 import { showAllUsersSpellsRouter } from "./routes/spells/spells/showAllUsersSpells";
 import { showOneSpellRouter } from "./routes/spells/spells/showOneSpell";
-import { createSpellRouter } from "./routes/spells/spells/createSpell";
+import { createSpellRouter } from "./routes/creation/createSpell";
 import { updateSpellRouter } from "./routes/spells/spells/updateSpell";
 import { deleteSpellRouter } from "./routes/spells/spells/deleteSpell";
 import { getImagesRouter } from "./routes/spells/getImages";
@@ -24,6 +24,7 @@ import { checkFavouritesRouter } from "./routes/spells/favourites/checkFavourite
 import { favouriteSpellRouter } from "./routes/spells/favourites/favouriteSpell";
 import { showSpellFavouritesRouter } from "./routes/spells/favourites/showSpellFavourites";
 import { deleteFavouritesRouter } from "./routes/spells/favourites/deleteFavourites";
+import { getUserSpellsRouter } from "./routes/mycodex/getUserSpells";
 
 const app = express();
 app.set("trust proxy", true);
@@ -43,11 +44,16 @@ app.use(signupRouter);
 app.use(getUsernameRouter);
 app.use(changeUsernameRouter);
 
+// Creation
+app.use(createSpellRouter); // post
+
+// MyCodex
+app.use(getUserSpellsRouter); // get
+
 // Spells
 app.use(showAllSpellRouter); // get
 app.use(showAllUsersSpellsRouter); // get
 app.use(showOneSpellRouter); // get dynamic
-app.use(createSpellRouter); // post
 app.use(updateSpellRouter); // put
 app.use(deleteSpellRouter); // delete
 
