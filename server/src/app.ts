@@ -4,12 +4,14 @@ import { json } from "body-parser";
 import cookieSession from "cookie-session";
 import { currentUser, errorHandler, NotFoundError } from "@niftickets/common";
 
-import { currentUserRouter } from "./routes/auth/current-user";
 import { signoutRouter } from "./routes/auth/signout";
 import { signupRouter } from "./routes/auth/signup";
 import { changeUsernameRouter } from "./routes/auth/changeUsername";
 import { getUsernameRouter } from "./routes/auth/getUsername";
 import { loginRouter } from "./routes/auth/login";
+import { getUserSpellsRouter } from "./routes/mycodex/getUserSpells";
+import { getFavouritesRouter } from "./routes/mycodex/getFavourites";
+import { favouriteSpellRouter } from "./routes/mycodex/favouriteSpell";
 
 import { showAllSpellRouter } from "./routes/spells/spells/showAllSpells";
 import { showAllUsersSpellsRouter } from "./routes/spells/spells/showAllUsersSpells";
@@ -21,10 +23,8 @@ import { getImagesRouter } from "./routes/spells/getImages";
 import { uploadImagesRouter } from "./routes/spells/upload";
 import { showAllFavouritesRouter } from "./routes/spells/favourites/showAllFavourites";
 import { checkFavouritesRouter } from "./routes/spells/favourites/checkFavourites";
-import { favouriteSpellRouter } from "./routes/spells/favourites/favouriteSpell";
 import { showSpellFavouritesRouter } from "./routes/spells/favourites/showSpellFavourites";
 import { deleteFavouritesRouter } from "./routes/spells/favourites/deleteFavourites";
-import { getUserSpellsRouter } from "./routes/mycodex/getUserSpells";
 
 const app = express();
 app.set("trust proxy", true);
@@ -49,6 +49,8 @@ app.use(createSpellRouter); // post
 
 // MyCodex
 app.use(getUserSpellsRouter); // get
+app.use(getFavouritesRouter); // get
+app.use(favouriteSpellRouter); // post
 
 // Spells
 app.use(showAllSpellRouter); // get
@@ -62,7 +64,6 @@ app.use(uploadImagesRouter); // post
 
 app.use(showAllFavouritesRouter); // get
 app.use(checkFavouritesRouter); // get dynamic
-app.use(favouriteSpellRouter); // post
 app.use(showSpellFavouritesRouter); // post
 app.use(deleteFavouritesRouter); // delete
 

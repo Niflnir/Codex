@@ -7,16 +7,18 @@ import useRequest from "../../hooks/use-request";
 import { Spell } from "../../utils/interfaces";
 import SpellLayout from "../../components/mycodex/SpellLayout";
 import Preview from "../../components/creation/Preview";
+import axios from "axios";
 
 const MyCodex: NextPage = () => {
+  const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [tags, setTags] = useState<Array<string>>([]);
   const [body, setBody] = useState<string>("");
   const [favouriteCount, setFavouriteCount] = useState<number>(0);
   const [preview, setPreview] = useState<boolean>(false);
   const [mySpells, setMySpells] = useState<Array<Spell>>([]);
-  const [myFavourites, setMyFavourites] = useState<Array<Spell>>([]);
-  const [tab, setTab] = useState<boolean>(false);
+  const [favouritesList, setFavouritesList] = useState<Array<string>>([]);
+  const [tab, setTab] = useState<boolean>(true);
 
   const getSpells = useRequest({
     url: "/api/mycodex/spells",
@@ -26,9 +28,19 @@ const MyCodex: NextPage = () => {
     },
   });
 
+  const getFavouritesList = useRequest({
+    url: "/api/mycodex/favourites",
+    method: "get",
+    onSuccess: (data) => {
+      setFavouritesList(data);
+    },
+  });
+
   useEffect(() => {
     // Get all of the user's spells
+    axios.get("/api/mycodex/favourites");
     getSpells.doRequest();
+    getFavouritesList.doRequest();
   }, []);
 
   return (
@@ -59,13 +71,16 @@ const MyCodex: NextPage = () => {
         {tab
           ? mySpells.map((spell) => (
             <SpellLayout
-              key={spell.id}
+              key={Math.random().toString(16).slice(2)}
+              id={spell.id}
               title={spell.title}
               tags={spell.tags}
               body={spell.body}
+              favourite={favouritesList.includes(spell.id)}
               favouriteCount={spell.favouriteCount}
               colour="sec"
               setPreview={setPreview}
+              setId={setId}
               setTitle={setTitle}
               setTags={setTags}
               setBody={setBody}
@@ -74,14 +89,17 @@ const MyCodex: NextPage = () => {
           ))
           : mySpells.map((spell) => (
             <SpellLayout
-              key={spell.id}
+              key={Math.random().toString(16).slice(2)}
+              id={spell.id}
               title={spell.title}
               tags={spell.tags}
               body={spell.body}
+              favourite={favouritesList.includes(spell.id)}
               favouriteCount={spell.favouriteCount}
               colour="saffron"
               setPreview={setPreview}
               setTitle={setTitle}
+              setId={setId}
               setTags={setTags}
               setBody={setBody}
               setFavouriteCount={setFavouriteCount}
@@ -89,6 +107,7 @@ const MyCodex: NextPage = () => {
           ))}
       </div>
       <Preview
+        id={id}
         title={title}
         tags={tags}
         body={body}
@@ -96,6 +115,7 @@ const MyCodex: NextPage = () => {
         preview={preview}
         setPreview={setPreview}
         creation={false}
+        favourite={favouritesList.includes(id)}
       />
     </div>
   );

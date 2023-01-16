@@ -1,14 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
+import useRequest from "../../hooks/use-request";
 import Tag from "../creation/Tag";
-import HeartIcon from "../svg/HeartIcon";
+import FavouriteIcon from "../svg/favouriteIcon";
 
 interface SpellProps {
+  id: string;
   title: string;
   tags: Array<string>;
   body: string;
   colour: string;
+  favourite: boolean;
   favouriteCount: number;
   setPreview: Dispatch<SetStateAction<boolean>>;
+  setId: Dispatch<SetStateAction<string>>;
   setTitle: Dispatch<SetStateAction<string>>;
   setTags: Dispatch<SetStateAction<Array<string>>>;
   setBody: Dispatch<SetStateAction<string>>;
@@ -18,15 +22,30 @@ interface SpellProps {
 const SpellLayout = (props: SpellProps) => {
   const clickHandler = () => {
     props.setPreview(true);
+    props.setId(props.id);
     props.setTitle(props.title);
     props.setBody(props.body);
     props.setTags(props.tags);
     props.setFavouriteCount(props.favouriteCount);
+    // isSpellFavouritedRequest.doRequest();
   };
+
+  // const isSpellFavouritedRequest = useRequest({
+  //   url: "/api/mycodex/favourite",
+  //   method: "post",
+  //   body: {
+  //     check: true,
+  //     id: props.id,
+  //   },
+  //   onSuccess: (data) => {
+  //     props.setFavourite(data);
+  //   },
+  // });
+
   return (
     <div
       onClick={clickHandler}
-      className={`flex relative items-center w-full px-2 py-1.5 text-white font-sc text-2xl border-y border-${props.colour} cursor-pointer hover:bg-${props.colour} hover:text-black transition delay-50 duration-150`}
+      className={`flex relative items-center w-full px-2 py-1.5 text-white font-sc text-2xl border-y border-${props.colour} cursor-pointer hover:bg-${props.colour} hover:text-black transition delay-50 duration-150 group`}
     >
       <div className="text-xl">{props.title}</div>
       <div className="absolute left-1/3 flex space-x-2">
@@ -42,12 +61,17 @@ const SpellLayout = (props: SpellProps) => {
           />
         ))}
       </div>
-      <div className="absolute right-3 flex items-center space-x-3">
-        <HeartIcon
-          className="w-5 h-5"
-          pathClassName={`stroke-${props.colour}`}
+      <div className="absolute right-3 flex items-center space-x-2">
+        <FavouriteIcon
+          className="w-6 h-6"
+          pathClassName={`${props.favourite
+              ? "fill-sec stroke-black stroke-[4px]"
+              : "fill-pri stroke-sec stroke-2"
+            }`}
         />
-        <div className={`font-mg text-md text-${props.colour}`}>
+        <div
+          className={`font-mg text-md text-${props.colour} group-hover:text-pri group-hover:font-semibold font-normal`}
+        >
           {props.favouriteCount}
         </div>
       </div>

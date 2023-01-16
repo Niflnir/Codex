@@ -28,7 +28,11 @@ router.post(
       throw new BadRequestError("Username is in use. Try again.");
     }
 
-    const user = User.build({ username, password });
+    const user = User.build({
+      username: username,
+      password: password,
+      favourites: [],
+    });
     await user.save();
 
     // Generate JWT
