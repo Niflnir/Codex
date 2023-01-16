@@ -1,26 +1,31 @@
 import { useState } from "react";
-import axios from "axios";
 import Router from "next/router";
+import useRequest from "../../hooks/use-request";
 
 export default () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginHandler = async () => {
-    try {
-      axios.post("/api/auth/login", {
-        username: username,
-        password: password,
-      });
-      Router.push("/home");
-    } catch (err) {
-      console.log(err);
-    }
+  const { doRequest, errors } = useRequest({
+    url: "/api/auth/login",
+    method: "post",
+    body: {
+      username,
+      password,
+    },
+    onSuccess: () => Router.push("/home"),
+  });
+
+  const loginHandler = () => {
+    doRequest();
   };
 
   return (
     <>
       <div className="space-y-9 mb-16">
+        <div className="flex justify-center text-lg text-red-400 font-sc">
+          {errors}
+        </div>
         <div className="flex relative items-center justify-start space-x-3">
           <div className="text-xl text-sec">username :</div>
           <input

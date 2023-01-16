@@ -8,9 +8,12 @@ import jwt from "jsonwebtoken";
 const router = express.Router();
 
 router.post(
-  "/api/users/signin",
+  "/api/auth/login",
   [
-    body("email").isEmail().withMessage("Email must be valid"),
+    body("username")
+      .trim()
+      .notEmpty()
+      .withMessage("You must supply a username"),
     body("password")
       .trim()
       .notEmpty()
@@ -18,9 +21,9 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ username });
     if (!existingUser) {
       throw new BadRequestError("Invalid credentials");
     }
@@ -30,14 +33,14 @@ router.post(
       password
     );
     if (!passwordsMatch) {
-      throw Error("wrong password");
-      // throw new BadRequestError('Wrong password')
+      // throw Error("wrong password");
+      throw new BadRequestError('Incorrect password. Please try again.')
     }
     // Generate JWT
     const userJwt = jwt.sign(
       {
         id: existingUser.id,
-        email: existingUser.email,
+        username: existingUser.username,
       },
       process.env.JWT_KEY!
     );
@@ -51,4 +54,4 @@ router.post(
   }
 );
 
-export { router as signinRouter };
+export { router as loginRouter };

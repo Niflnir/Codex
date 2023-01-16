@@ -6,7 +6,7 @@ interface Spell {
   handler: MouseEventHandler;
 }
 
-const Spell = (props: Spell) => {
+const SpellLayout = (props: Spell) => {
   return (
     <button
       onClick={props.handler}
@@ -18,4 +18,4 @@ const Spell = (props: Spell) => {
   );
 };
 
-export default Spell;
+export default SpellLayout;

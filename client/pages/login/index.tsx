@@ -1,28 +1,8 @@
 import { NextPage } from "next";
 import Link from "next/link";
-import { useState } from "react";
-import useRequest from "../../hooks/use-request";
-import Router from "next/router";
 import UsernameAndPasswordLogin from "../../components/login/UsernameAndPasswordLogin";
 
 const Login: NextPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { doRequest, errors } = useRequest({
-    url: "/api/users/signin",
-    method: "post",
-    body: {
-      email,
-      password,
-    },
-    onSuccess: () => Router.push("/mycodex"),
-  });
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    doRequest();
-  };
-
   return (
     <div className="flex items-center justify-center min-h-screen font-mg min-w-[550px] bg-black">
       <div className="flex flex-col px-32 pt-12 pb-4 bg-pri border border-sec shadow-lg rounded-2xl w-2/5 min-w-[500px]">

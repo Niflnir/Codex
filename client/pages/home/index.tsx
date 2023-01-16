@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { NextPage, NextPageContext } from "next";
 import CreationPhoto from "../../public/images/creationPhoto.jpg";
 import CodexPhoto from "../../public/images/sunset.jpg";
 import ExplorePhoto from "../../public/images/exploree.jpg";
@@ -6,20 +6,20 @@ import HomeIcon from "../../components/svg/homeIcon";
 import HomeModal from "../../components/home/HomeModal";
 import Router from "next/router";
 import Header from "../../components/header";
-import Sidebar from "../../components/sidebar";
+import Sidebar from "../../components/Sidebar";
 
 const Home: NextPage = () => {
   return (
     <div className="flex-col-center pb-32 relative min-h-screen bg-black font-mg min-w-[700px]">
+      <Header
+        icon={<HomeIcon className="w-7 h-7" pathClassName="fill-sec" />}
+        title="HOME"
+      />
       <Sidebar />
       <div className="flex fixed opacity-30 w-full h-screen bg-center bg-cover bg-gh"></div>
       <div className="text-3xl text-saffron mt-28 mb-16">
         What Would You Like To Do?
       </div>
-      <Header
-        icon={<HomeIcon className="w-6 h-6" pathClassName="" />}
-        title="HOME"
-      />
       <div className="space-y-32">
         <HomeModal
           title="Creation"
@@ -44,18 +44,18 @@ const Home: NextPage = () => {
   );
 };
 
-// Home.getInitialProps = async (ctx: NextPageContext) => {
-//   // Check if cookie is set, if not set, redirect to login screen
-//   if (!ctx.req?.headers.cookie) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//       },
-//     };
-//   }
-//   const client = buildClient(ctx);
-//   const { data } = await client.get("/api/users/currentuser");
-//   return data;
-// };
+export const getServerSideProps = async (ctx: NextPageContext) => {
+  // Check if cookie is set, if not set, redirect to login screen
+  if (!ctx.req?.headers.cookie) {
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+};
 
 export default Home;

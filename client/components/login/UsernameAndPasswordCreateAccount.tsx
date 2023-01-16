@@ -1,26 +1,31 @@
 import { useState } from "react";
-import axios from "axios";
 import Router from "next/router";
+import useRequest from "../../hooks/use-request";
 
 export default () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginHandler = async () => {
-    try {
-      axios.post("/api/auth/signup", {
-        username: username,
-        password: password,
-      });
-      Router.push("/login");
-    } catch (err) {
-      console.log(err);
-    }
+  const { doRequest, errors } = useRequest({
+    url: "/api/auth/signup",
+    method: "post",
+    body: {
+      username,
+      password,
+    },
+    onSuccess: () => Router.push("/login"),
+  });
+
+  const signupHandler = () => {
+    doRequest();
   };
 
   return (
     <>
       <div className="space-y-9 mb-16">
+        <div className="flex justify-center text-lg text-red-400 font-sc">
+          {errors}
+        </div>
         <div className="flex relative items-center justify-start space-x-3">
           <div className="text-xl text-sec">username :</div>
           <input
@@ -48,7 +53,7 @@ export default () => {
         <button
           className="px-2 py-1 text-xl text-sec border border-sec rounded-md hover:text-pri hover:bg-sec transition delay-50"
           onClick={() => {
-            loginHandler();
+            signupHandler();
           }}
         >
           Create Account

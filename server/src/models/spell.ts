@@ -3,16 +3,17 @@ import mongoose from "mongoose";
 export interface SpellAttrs {
   userId: string;
   title: string;
+  tags: Array<string>;
   body: string;
-  imagePaths: Array<string>;
+  favouriteCount: number;
 }
 
 interface SpellDoc extends mongoose.Document {
   userId: string;
   title: string;
+  tags: Array<string>;
   body: string;
-  imagePaths: Array<string>;
-  version: number;
+  favouriteCount: number;
 }
 
 interface SpellModel extends mongoose.Model<SpellDoc> {
@@ -29,13 +30,17 @@ const spellSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    tags: {
+      type: Array<String>,
+      required: false,
+    },
     body: {
       type: String,
       required: true,
     },
-    imagePaths: {
-      type: Array<String>,
-      required: false,
+    favouriteCount: {
+      type: Number,
+      required: true,
     },
   },
   {
