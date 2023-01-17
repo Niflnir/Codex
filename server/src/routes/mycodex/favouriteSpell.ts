@@ -19,21 +19,21 @@ router.post(
     } else {
       if (isSpellFavourited === true) {
         await User.updateOne(
-          { id: req.currentUser!.id },
+          { _id: req.currentUser!.id },
           { $pull: { favourites: req.body.id } }
         );
         await Spell.updateOne(
-          { id: req.body.id },
+          { _id: req.body.id },
           { $inc: { favouriteCount: -1 } }
         );
         res.status(204).send("Spell has been unfavourited successfully");
       } else {
         await User.updateOne(
-          { id: req.currentUser!.id },
+          { _id: req.currentUser!.id },
           { $push: { favourites: req.body.id } }
         );
         await Spell.updateOne(
-          { id: req.body.id },
+          { _id: req.body.id },
           { $inc: { favouriteCount: 1 } }
         );
         res.status(204).send("Spell has been favourited successfully");

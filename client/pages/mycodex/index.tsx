@@ -18,6 +18,7 @@ const MyCodex: NextPage = () => {
   const [preview, setPreview] = useState<boolean>(false);
   const [mySpells, setMySpells] = useState<Array<Spell>>([]);
   const [favouritesList, setFavouritesList] = useState<Array<string>>([]);
+  const [favouritesSpells, setFavouritesSpells] = useState<Array<Spell>>([]);
   const [tab, setTab] = useState<boolean>(true);
 
   const getSpells = useRequest({
@@ -32,7 +33,8 @@ const MyCodex: NextPage = () => {
     url: "/api/mycodex/favourites",
     method: "get",
     onSuccess: (data) => {
-      setFavouritesList(data);
+      setFavouritesList(data.favouritesList);
+      setFavouritesSpells(data.favouriteSpells);
     },
   });
 
@@ -41,7 +43,8 @@ const MyCodex: NextPage = () => {
     axios.get("/api/mycodex/favourites");
     getSpells.doRequest();
     getFavouritesList.doRequest();
-  }, []);
+    console.log("preview triggered");
+  }, [preview]);
 
   return (
     <div className="flex-col-center pb-32 relative min-h-screen bg-center bg-cover bg-black font-mg min-w-[700px]">
@@ -87,7 +90,7 @@ const MyCodex: NextPage = () => {
               setFavouriteCount={setFavouriteCount}
             />
           ))
-          : mySpells.map((spell) => (
+          : favouritesSpells.map((spell) => (
             <SpellLayout
               key={Math.random().toString(16).slice(2)}
               id={spell.id}
@@ -115,7 +118,9 @@ const MyCodex: NextPage = () => {
         preview={preview}
         setPreview={setPreview}
         creation={false}
-        favourite={favouritesList.includes(id)}
+        favouritesList={favouritesList}
+        setFavouritesList={setFavouritesList}
+        favouriteCount={favouriteCount}
       />
     </div>
   );

@@ -29,6 +29,7 @@ const Creation: NextPage = () => {
         <div className="flex space-x-5 text-white">
           <div className="text-2xl">Title :</div>
           <input
+            maxLength={60}
             className="bg-pri w-10/12 px-2 font-sc rounded-sm"
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -66,6 +67,8 @@ const Creation: NextPage = () => {
         </div>
       </div>
       <Preview
+        id={""}
+        key={Math.random().toString(16).slice(2)}
         title={title}
         tags={tags}
         setTags={setTags}
@@ -73,6 +76,9 @@ const Creation: NextPage = () => {
         setPreview={setPreview}
         body={body}
         creation={true}
+        favouritesList={[]}
+        favouriteCount={0}
+        setFavouritesList={setTags}
       />
     </div>
   );
