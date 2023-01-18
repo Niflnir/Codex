@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       />
       <Sidebar />
       <div className="flex fixed opacity-30 w-full h-screen bg-center bg-cover bg-gh"></div>
-      <div className="text-3xl text-saffron mt-28 mb-16">
+      <div className="text-3xl text-saf mt-28 mb-16">
         What Would You Like To Do?
       </div>
       <div className="space-y-32">

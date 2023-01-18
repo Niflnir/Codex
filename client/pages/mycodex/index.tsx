@@ -60,14 +60,14 @@ const MyCodex: NextPage = () => {
           My Spells
         </div>
         <div
-          className={`${tab ? "text-gray" : "text-saffron"} cursor-pointer`}
+          className={`${tab ? "text-gray" : "text-saf"} cursor-pointer`}
           onClick={() => setTab(false)}
         >
           Favourites
         </div>
       </div>
       <div
-        className={`flex flex-col overflow-auto absolute bg-pri w-full h-2/3 top-1/6 ${tab ? "border-sec" : "border-saffron"
+        className={`flex flex-col overflow-auto absolute bg-pri w-full h-2/3 top-1/6 ${tab ? "border-sec" : "border-saf"
           } border-y`}
       >
         {tab
@@ -98,7 +98,7 @@ const MyCodex: NextPage = () => {
               body={spell.body}
               favourite={favouritesList.includes(spell.id)}
               favouriteCount={spell.favouriteCount}
-              colour="saffron"
+              colour="saf"
               setPreview={setPreview}
               setTitle={setTitle}
               setId={setId}

@@ -3,7 +3,9 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import useRequest from "../../hooks/use-request";
 import FavouriteIcon from "../svg/favouriteIcon";
+import LoadingGif from "../../public/images/Dual Ball-1s-200px.gif";
 import Tag from "./Tag";
+import Image from "next/image";
 
 interface PreviewProps {
   preview: boolean;

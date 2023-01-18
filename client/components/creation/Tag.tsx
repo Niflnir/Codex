@@ -25,7 +25,7 @@ const Tag = (props: TagProps) => {
         <div className="group" onClick={deleteHandler}>
           <XIcon
             className={`w-4 h-4 cursor-pointer`}
-            pathClassName="group-hover:stroke-saffron"
+            pathClassName="group-hover:stroke-saf"
           />
         </div>
       )}

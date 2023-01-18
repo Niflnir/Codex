@@ -13,15 +13,6 @@
 }
 
 @layer components {
-  .input-primary {
-    @apply caret-blue w-80 bg-transparent whitespace-pre border-b border-gray-300 text-sm text-blue focus:outline-none focus:border-blue;
-  }
-  .btn-mycodex-blue {
-    @apply bg-white px-5 py-2 w-5/6 rounded-3xl text-blue outline outline-1 outline-blue hover:bg-blue hover:text-white duration-300 hover:animate-wiggle;
-  }
-  .btn-mycodex-saffron {
-    @apply bg-white px-5 py-2 w-5/6 rounded-3xl text-saffron outline outline-1 outline-saffron hover:bg-saffron hover:text-white duration-300 hover:animate-wiggle;
-  }
   .modal-base {
     @apply fixed w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center duration-500 animate-fade;
   }
