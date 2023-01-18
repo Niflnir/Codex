@@ -9,7 +9,8 @@ router.post(
   "/api/mycodex/favourite",
   requireAuth,
   async (req: Request, res: Response) => {
-    const user = await User.findOne({ id: req.currentUser!.id });
+    const user = await User.findOne({ _id: req.currentUser!.id });
+    console.log(req.currentUser!.id);
     if (!user) {
       throw new NotAuthorizedError();
     }

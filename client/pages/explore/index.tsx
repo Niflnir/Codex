@@ -19,10 +19,9 @@ const MyCodex: NextPage = () => {
   const [mySpells, setMySpells] = useState<Array<Spell>>([]);
   const [favouritesList, setFavouritesList] = useState<Array<string>>([]);
   const [favouritesSpells, setFavouritesSpells] = useState<Array<Spell>>([]);
-  const [tab, setTab] = useState<boolean>(true);
 
   const getSpells = useRequest({
-    url: "/api/mycodex/spells",
+    url: "/api/explore/spells",
     method: "get",
     onSuccess: (data) => {
       setMySpells(data);
@@ -52,61 +51,47 @@ const MyCodex: NextPage = () => {
         title="My Codex"
       />
       <Sidebar />
-      <div className="flex space-x-64 mt-24 text-3xl">
-        <div
-          className={`${tab ? "text-sec" : "text-gray"} cursor-pointer`}
-          onClick={() => setTab(true)}
-        >
-          My Spells
-        </div>
-        <div
-          className={`${tab ? "text-gray" : "text-saffron"} cursor-pointer`}
-          onClick={() => setTab(false)}
-        >
-          Favourites
-        </div>
+      <div className="absolute left-2 mt-28 text-4xl text-sec">Popular</div>
+      <div className={`flex flex-col absolute w-full h-1/5 top-1/6`}>
+        {mySpells.map((spell) => (
+          <SpellLayout
+            key={Math.random().toString(16).slice(2)}
+            id={spell.id}
+            title={spell.title}
+            tags={spell.tags}
+            body={spell.body}
+            favourite={favouritesList.includes(spell.id)}
+            favouriteCount={spell.favouriteCount}
+            colour="sec"
+            setPreview={setPreview}
+            setId={setId}
+            setTitle={setTitle}
+            setTags={setTags}
+            setBody={setBody}
+            setFavouriteCount={setFavouriteCount}
+          />
+        ))}
       </div>
-      <div
-        className={`flex flex-col overflow-auto absolute bg-pri w-full h-2/3 top-1/6 ${tab ? "border-sec" : "border-saffron"
-          } border-y`}
-      >
-        {tab
-          ? mySpells.map((spell) => (
-            <SpellLayout
-              key={Math.random().toString(16).slice(2)}
-              id={spell.id}
-              title={spell.title}
-              tags={spell.tags}
-              body={spell.body}
-              favourite={favouritesList.includes(spell.id)}
-              favouriteCount={spell.favouriteCount}
-              colour="sec"
-              setPreview={setPreview}
-              setId={setId}
-              setTitle={setTitle}
-              setTags={setTags}
-              setBody={setBody}
-              setFavouriteCount={setFavouriteCount}
-            />
-          ))
-          : favouritesSpells.map((spell) => (
-            <SpellLayout
-              key={Math.random().toString(16).slice(2)}
-              id={spell.id}
-              title={spell.title}
-              tags={spell.tags}
-              body={spell.body}
-              favourite={favouritesList.includes(spell.id)}
-              favouriteCount={spell.favouriteCount}
-              colour="saffron"
-              setPreview={setPreview}
-              setTitle={setTitle}
-              setId={setId}
-              setTags={setTags}
-              setBody={setBody}
-              setFavouriteCount={setFavouriteCount}
-            />
-          ))}
+      <div className="absolute left-2 mt-96 text-4xl text-sec">New</div>
+      <div className={`flex flex-col absolute w-full h-1/5 top-[430px]`}>
+        {mySpells.map((spell) => (
+          <SpellLayout
+            key={Math.random().toString(16).slice(2)}
+            id={spell.id}
+            title={spell.title}
+            tags={spell.tags}
+            body={spell.body}
+            favourite={favouritesList.includes(spell.id)}
+            favouriteCount={spell.favouriteCount}
+            colour="sec"
+            setPreview={setPreview}
+            setId={setId}
+            setTitle={setTitle}
+            setTags={setTags}
+            setBody={setBody}
+            setFavouriteCount={setFavouriteCount}
+          />
+        ))}
       </div>
       <Preview
         id={id}

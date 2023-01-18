@@ -25,6 +25,7 @@ import { showAllFavouritesRouter } from "./routes/spells/favourites/showAllFavou
 import { checkFavouritesRouter } from "./routes/spells/favourites/checkFavourites";
 import { showSpellFavouritesRouter } from "./routes/spells/favourites/showSpellFavourites";
 import { deleteFavouritesRouter } from "./routes/spells/favourites/deleteFavourites";
+import { getTopFiveSpellsRouter } from "./routes/explore/getTopFiveSpells";
 
 const app = express();
 app.set("trust proxy", true);
@@ -51,6 +52,9 @@ app.use(createSpellRouter); // post
 app.use(getUserSpellsRouter); // get
 app.use(getFavouritesRouter); // get
 app.use(favouriteSpellRouter); // post
+
+// Explore
+app.use(getTopFiveSpellsRouter); //get
 
 // Spells
 app.use(showAllSpellRouter); // get

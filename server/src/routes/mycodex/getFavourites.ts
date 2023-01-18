@@ -13,10 +13,14 @@ router.get(
     if (!user) {
       throw new NotAuthorizedError();
     }
-    const spells = await Spell.find(
-      { _id: { $in: user.favourites } }
+    const filteredFavourites = user.favourites.filter(
+      (favourite) => favourite.trim().length > 0
     );
-    res.status(200).send({ favouritesList: user.favourites, favouriteSpells: spells });
+    console.log(filteredFavourites);
+    const spells = await Spell.find({ _id: { $in: filteredFavourites } });
+    res
+      .status(200)
+      .send({ favouritesList: user.favourites, favouriteSpells: spells });
   }
 );
 
