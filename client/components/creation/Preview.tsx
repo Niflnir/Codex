@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import useRequest from "../../hooks/use-request";
@@ -11,14 +11,15 @@ interface PreviewProps {
   title: string;
   tags: string[];
   body: string;
-  favourite: boolean;
+  favouritesList: Array<string>;
+  favouriteCount: number;
   creation: boolean;
   setPreview: Dispatch<SetStateAction<boolean>>;
   setTags: Dispatch<SetStateAction<string[]>>;
+  setFavouritesList: Dispatch<SetStateAction<string[]>>;
 }
 
 const Preview = (props: PreviewProps) => {
-  const [favourite, setFavourite] = useState<boolean>(props.favourite);
   const createSpellRequest = useRequest({
     url: "/api/creation/spell",
     method: "post",
@@ -38,8 +39,14 @@ const Preview = (props: PreviewProps) => {
       check: false,
       id: props.id,
     },
-    onSuccess: (data) => {
-      setFavourite(!favourite);
+    onSuccess: () => {
+      if (props.favouritesList.includes(props.id)) {
+        props.setFavouritesList(
+          props.favouritesList.filter((favourite) => favourite !== props.id)
+        );
+      } else {
+        props.setFavouritesList([...props.favouritesList, props.id]);
+      }
     },
   });
 
@@ -67,11 +74,15 @@ const Preview = (props: PreviewProps) => {
             >
               <FavouriteIcon
                 className="w-7 h-7 group-hover:scale-125 transition"
-                pathClassName={`${favourite ? "fill-sec" : "fill-pri stroke-sec stroke-2"
+                pathClassName={`${props.favouritesList.includes(props.id)
+                    ? "fill-sec"
+                    : "fill-pri stroke-sec stroke-2"
                   }`}
               />
             </div>
-            <div className={`font-mg text-3xl text-sec`}>0</div>
+            <div className={`font-mg text-3xl text-sec`}>
+              {props.favouriteCount}
+            </div>
           </div>
         </div>
         <div className="flex space-x-3 text-white text-lg">

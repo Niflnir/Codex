@@ -1,12 +1,14 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { authSlice } from "./spellSlice";
 import { loadingSlice } from "./loadingSlice";
 import { createWrapper } from "next-redux-wrapper";
+import { alertSlice } from "./alertSlice";
+import { alertMessageSlice } from "./alertMessageSlice";
 
 const makeStore = () =>
   configureStore({
     reducer: {
-      [authSlice.name]: authSlice.reducer,
+      [alertSlice.name]: alertSlice.reducer,
+      [alertMessageSlice.name]: alertMessageSlice.reducer,
       [loadingSlice.name]: loadingSlice.reducer,
     },
     devTools: true,

@@ -6,16 +6,24 @@ import CreationIcon from "../../components/svg/CreationIcon";
 import AddTag from "../../components/creation/AddTag";
 import Tag from "../../components/creation/Tag";
 import Preview from "../../components/creation/Preview";
+import { useDispatch } from "react-redux";
+import { setAlertState } from "../../redux/alertSlice";
+import Alert from "../../components/Alert";
+import { setAlertMessageState } from "../../redux/alertMessageSlice";
 
 const Creation: NextPage = () => {
   const [body, setBody] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [preview, setPreview] = useState<boolean>(false);
   const [tags, setTags] = useState<Array<string>>([]);
+  const dispatch = useDispatch();
 
   const previewHandler = () => {
     if (body.trim() !== "" && title.trim() !== "") setPreview(true);
     else {
+      dispatch(setAlertMessageState("Body must be filled"));
+      dispatch(setAlertState(true));
+      setTimeout(() => dispatch(setAlertState(false)), 1000);
     }
   };
   return (
@@ -29,6 +37,7 @@ const Creation: NextPage = () => {
         <div className="flex space-x-5 text-white">
           <div className="text-2xl">Title :</div>
           <input
+            maxLength={60}
             className="bg-pri w-10/12 px-2 font-sc rounded-sm"
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -37,6 +46,7 @@ const Creation: NextPage = () => {
           <div className="text-2xl mr-2.5">Tags :</div>
           {tags.map((tag) => (
             <Tag
+              key={Math.random().toString(16).slice(2)}
               tag={tag}
               tags={tags}
               setTags={setTags}
@@ -66,6 +76,8 @@ const Creation: NextPage = () => {
         </div>
       </div>
       <Preview
+        id={""}
+        key={Math.random().toString(16).slice(2)}
         title={title}
         tags={tags}
         setTags={setTags}
@@ -73,7 +85,11 @@ const Creation: NextPage = () => {
         setPreview={setPreview}
         body={body}
         creation={true}
+        favouritesList={[]}
+        favouriteCount={0}
+        setFavouritesList={setTags}
       />
+      <Alert />
     </div>
   );
 };

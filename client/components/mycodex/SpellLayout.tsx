@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-import useRequest from "../../hooks/use-request";
 import Tag from "../creation/Tag";
 import FavouriteIcon from "../svg/favouriteIcon";
 
@@ -27,25 +26,12 @@ const SpellLayout = (props: SpellProps) => {
     props.setBody(props.body);
     props.setTags(props.tags);
     props.setFavouriteCount(props.favouriteCount);
-    // isSpellFavouritedRequest.doRequest();
   };
-
-  // const isSpellFavouritedRequest = useRequest({
-  //   url: "/api/mycodex/favourite",
-  //   method: "post",
-  //   body: {
-  //     check: true,
-  //     id: props.id,
-  //   },
-  //   onSuccess: (data) => {
-  //     props.setFavourite(data);
-  //   },
-  // });
 
   return (
     <div
       onClick={clickHandler}
-      className={`flex relative items-center w-full px-2 py-1.5 text-white font-sc text-2xl border-y border-${props.colour} cursor-pointer hover:bg-${props.colour} hover:text-black transition delay-50 duration-150 group`}
+      className={`flex bg-pri relative items-center w-full px-2 py-1.5 text-white font-sc text-2xl border-y border-${props.colour} cursor-pointer hover:bg-${props.colour} hover:text-black transition delay-50 duration-150 group`}
     >
       <div className="text-xl">{props.title}</div>
       <div className="absolute left-1/3 flex space-x-2">
@@ -61,12 +47,12 @@ const SpellLayout = (props: SpellProps) => {
           />
         ))}
       </div>
-      <div className="absolute right-3 flex items-center space-x-2">
+      <div className="flex absolute right-5 items-center space-x-2">
         <FavouriteIcon
           className="w-6 h-6"
           pathClassName={`${props.favourite
-              ? "fill-sec stroke-black stroke-[4px]"
-              : "fill-pri stroke-sec stroke-2"
+              ? `fill-${props.colour} stroke-black stroke-[4px]`
+              : `fill-pri stroke-${props.colour} stroke-2`
             }`}
         />
         <div

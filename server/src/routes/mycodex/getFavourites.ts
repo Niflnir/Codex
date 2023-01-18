@@ -9,11 +9,18 @@ router.get(
   "/api/mycodex/favourites",
   requireAuth,
   async (req: Request, res: Response) => {
-    const user = await User.findOne({ id: req.currentUser!.id });
+    const user = await User.findOne({ _id: req.currentUser!.id });
     if (!user) {
       throw new NotAuthorizedError();
     }
-    res.status(200).send(user.favourites);
+    const filteredFavourites = user.favourites.filter(
+      (favourite) => favourite.trim().length > 0
+    );
+    console.log(filteredFavourites);
+    const spells = await Spell.find({ _id: { $in: filteredFavourites } });
+    res
+      .status(200)
+      .send({ favouritesList: user.favourites, favouriteSpells: spells });
   }
 );
 
