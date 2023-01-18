@@ -1,0 +1,37 @@
+version: "3"
+services:
+  client:
+    build: ./client/
+    image: client:latest
+    environment:
+      PORT: 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/app
+    networks:
+      - app-network
+  server:
+    build: ./server/
+    image: server:latest
+    environment:
+      JWT_KEY: ${JWT_KEY}
+      MONGO_URI: ${MONGO_URI}
+      PORT: 8080
+    ports:
+      - 8080:8080
+    volumes:
+      - ./server:/app
+    networks:
+      - app-network
+  proxy:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
