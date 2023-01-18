@@ -2,7 +2,7 @@ version: "3"
 services:
   client:
     build: ./client/
-    image: client:latest
+    image: niflnir/client:latest
     environment:
       PORT: 3000
     ports:
@@ -13,7 +13,7 @@ services:
       - app-network
   server:
     build: ./server/
-    image: server:latest
+    image: niflnir/server:latest
     environment:
       JWT_KEY: ${JWT_KEY}
       MONGO_URI: ${MONGO_URI}
