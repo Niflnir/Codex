@@ -46,9 +46,7 @@ const Codexplore: NextPage = () => {
       <div className="flex flex-grow min-w-full items-center justify-center h-full">
         <div className="bg-white flex flex-col rounded-xl divide-y divide-gray-300 w-3/4">
           <div className="py-2 flex flex-row">
-            <div className="ml-4 text-md md:text-xl text-saffron">
-              Codexplore
-            </div>
+            <div className="ml-4 text-md md:text-xl text-saf">Codexplore</div>
           </div>
           <div className="flex flex-row divide-x divide-gray-300">
             <div className="flex flex-col items-center pt-6 text-xs min-w-[160px] md:min-w-[210px] md:text-base">

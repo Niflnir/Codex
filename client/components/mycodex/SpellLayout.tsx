@@ -51,7 +51,9 @@ const SpellLayout = (props: SpellProps) => {
         <FavouriteIcon
           className="w-6 h-6"
           pathClassName={`${props.favourite
-              ? `fill-${props.colour} stroke-black stroke-[4px]`
+              ? props.colour === "sec"
+                ? "fill-sec stroke-black stroke-[4px]"
+                : "fill-saf stroke-black stroke-[4px]"
               : `fill-pri stroke-${props.colour} stroke-2`
             }`}
         />

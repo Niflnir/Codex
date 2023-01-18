@@ -44,7 +44,7 @@ const AddTag = (props: AddTagProps) => {
           >
             <XIcon
               className="w-4 h-5 mt-1.5 cursor-pointer"
-              pathClassName="group-hover:stroke-saffron"
+              pathClassName="group-hover:stroke-saf"
             />
           </div>
         </div>
