@@ -16,8 +16,8 @@ router.get(
   async (req: Request, res: Response) => {
     const spells = await Spell.find({});
     spells.sort(compare);
-    res.status(200).send(spells.slice(0, 5));
+    res.status(200).send(spells.slice(0, 6));
   }
 );
 
-export { router as getTopFiveSpellsRouter };
+export { router as getTopSpellsRouter };

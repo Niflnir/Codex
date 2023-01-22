@@ -35,6 +35,16 @@ module.exports = {
         144: "36rem",
         160: "40rem",
       },
+      margin: {
+        112: "28rem",
+        120: "30rem",
+        124: "31rem",
+        128: "32rem",
+        132: "33rem",
+        136: "34rem",
+        140: "35rem",
+        144: "36rem",
+      },
       backgroundImage: {
         "split-bg": "linear-gradient(to right, #166095 50%, #DEB992 50%)",
         gh: "url(/images/greenhills.jpg)",
