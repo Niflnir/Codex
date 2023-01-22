@@ -17,6 +17,8 @@ services:
     environment:
       JWT_KEY: ${JWT_KEY}
       MONGO_URI: ${MONGO_URI}
+      USER_EMAIL: ${USER_EMAIL}
+      USER_PASSWORD: ${USER_PASSWORD}
       PORT: 8080
     ports:
       - 8080:8080
