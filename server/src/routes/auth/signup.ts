@@ -9,10 +9,7 @@ const router = express.Router();
 router.post(
   "/api/auth/signup",
   [
-    body("username")
-      .trim()
-      .isLength({ min: 4, max: 20 })
-      .withMessage("Username must be between 4 and 20 characters"),
+    body("email").isEmail().withMessage("Email must be valid"),
     body("password")
       .trim()
       .isLength({ min: 4, max: 20 })
@@ -20,16 +17,16 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      throw new BadRequestError("Username is in use. Try again.");
+      throw new BadRequestError("Email is in use. Try again.");
     }
 
     const user = User.build({
-      username: username,
+      email: email,
       password: password,
       favourites: [],
     });
@@ -39,7 +36,7 @@ router.post(
     const userJwt = jwt.sign(
       {
         id: user.id,
-        username: user.username,
+        email: user.email,
       },
       process.env.JWT_KEY!
     );

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Link from "next/link";
-import UsernameAndPasswordCreateAccount from "../../components/login/UsernameAndPasswordCreateAccount";
+import LoginModal from "../../components/login/LoginModal";
 
 const Login: NextPage = () => {
   return (
@@ -12,7 +12,11 @@ const Login: NextPage = () => {
         <div className="flex items-center justify-center mb-20">
           <div className="text-2xl text-sec">the world of spells</div>
         </div>
-        <UsernameAndPasswordCreateAccount />
+        <LoginModal
+          buttonName="Create Account"
+          url="/api/auth/signup"
+          redirectUrl="/home"
+        />
         <div className="flex flex-col px-6 items-center">
           <div className="pt-20 text-gray-400 text-base space-x-1">
             <Link href="/login">

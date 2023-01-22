@@ -72,8 +72,8 @@ const MyCodex: NextPage = () => {
           />
         ))}
       </div>
-      <div className="absolute left-2 mt-96 text-4xl text-sec">New</div>
-      <div className={`flex flex-col absolute w-full h-1/5 top-[430px]`}>
+      <div className="absolute left-2 mt-132 text-4xl text-sec">New</div>
+      <div className={`flex flex-col absolute w-full mt-144`}>
         {mySpells.map((spell) => (
           <SpellLayout
             key={Math.random().toString(16).slice(2)}

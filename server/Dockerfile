@@ -1,13 +1,15 @@
 FROM node:alpine
 
+ENV NODE_OPTIONS=--max-old-space-size=4096
+
 WORKDIR /app
 
-COPY package.json .
+COPY package.json yarn.lock ./
 
-RUN npm install --only=prod
+RUN yarn install --frozen-lockfile
 
 COPY . .
 
 EXPOSE $PORT
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
