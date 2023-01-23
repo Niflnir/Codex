@@ -13,6 +13,8 @@ import { createSpellRouter } from "./routes/creation/createSpell";
 import { logoutRouter } from "./routes/auth/logout";
 import { forgotPasswordRouter } from "./routes/auth/forgot-password";
 import { getTopSpellsRouter } from "./routes/explore/getTopSpells";
+import { verifyTokenRouter } from "./routes/auth/verify-token";
+import { resetPasswordRouter } from "./routes/auth/reset-password";
 
 const app = express();
 app.set("trust proxy", true);
@@ -29,6 +31,8 @@ app.use(loginRouter);
 app.use(logoutRouter);
 app.use(signupRouter);
 app.use(forgotPasswordRouter);
+app.use(verifyTokenRouter);
+app.use(resetPasswordRouter);
 
 // Creation
 app.use(createSpellRouter); // post

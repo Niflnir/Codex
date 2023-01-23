@@ -16,6 +16,7 @@ const Login: NextPage = () => {
           buttonName="login"
           url="/api/auth/login"
           redirectUrl="/home"
+          password={true}
         />
         <div className="flex flex-col px-6 items-center">
           <div className="pt-20 text-gray-400 text-md space-x-1">
