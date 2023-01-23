@@ -25,7 +25,6 @@ router.post("/api/auth/forgot", async (req: Request, res: Response) => {
     createdAt: new Date(Date.now()),
   });
   await newToken.save();
-  console.log(newToken);
 
   // Send an email to the user with the password reset link
   let transporter = nodemailer.createTransport({
@@ -44,9 +43,7 @@ router.post("/api/auth/forgot", async (req: Request, res: Response) => {
     text:
       "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
       "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
-      "http://" +
-      req.headers.host +
-      "/api/auth/reset/" +
+      "http://localhost:8080/api/auth/verify/" +
       token +
       "\n\n" +
       "If you did not request this, please ignore this email and your password will remain unchanged.\n",

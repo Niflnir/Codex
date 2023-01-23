@@ -7,6 +7,7 @@ interface LoginModalInterface {
   buttonName: string;
   url: string;
   redirectUrl: string;
+  password: boolean;
 }
 
 const LoginModal = (props: LoginModalInterface) => {
@@ -40,20 +41,22 @@ const LoginModal = (props: LoginModalInterface) => {
             type="text"
           />
         </div>
-        <div className="flex flex-col relative items-center justify-start space-y-1">
-          <div className="text-2xl text-sec self-start ml-16">Password</div>
-          <input
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="px-1.5 py-0.5 w-3/4 font-sc text-sec bg-pri border-sec border rounded-md outline-none focus:border-saf"
-            autoComplete="off"
-            type="text"
-          />
-        </div>
+        {props.password && (
+          <div className="flex flex-col relative items-center justify-start space-y-1">
+            <div className="text-2xl text-sec self-start ml-16">Password</div>
+            <input
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="px-1.5 py-0.5 w-3/4 font-sc text-sec bg-pri border-sec border rounded-md outline-none focus:border-saf"
+              autoComplete="off"
+              type="text"
+            />
+          </div>
+        )}
       </div>
       <div className="self-end text-sec text-md mr-16">
-        <Link href="/forgot">
+        <Link href="/auth/forgot">
           <a href="" className="hover:underline hover:text-saf outline-none">
             Forgot Password?
           </a>
