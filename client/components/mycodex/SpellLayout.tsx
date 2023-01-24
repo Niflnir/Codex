@@ -31,7 +31,9 @@ const SpellLayout = (props: SpellProps) => {
   return (
     <div
       onClick={clickHandler}
-      className={`flex bg-pri relative items-center w-full px-2 py-1.5 text-white font-sc text-2xl border-y border-${props.colour} cursor-pointer hover:bg-${props.colour} hover:text-black transition delay-50 duration-150 group`}
+      className={`flex bg-pri relative items-center w-full px-2 py-1.5 text-white font-sc text-2xl border-y border-${props.colour
+        } cursor-pointer ${props.colour == "sec" ? "hover:bg-sec" : "hover:bg-saf"
+        } hover:text-black transition delay-50 duration-150 group`}
     >
       <div className="text-xl">{props.title}</div>
       <div className="absolute left-1/3 flex space-x-2">

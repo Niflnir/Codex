@@ -1,11 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import useRequest from "../../hooks/use-request";
 import FavouriteIcon from "../svg/favouriteIcon";
-import LoadingGif from "../../public/images/Dual Ball-1s-200px.gif";
 import Tag from "./Tag";
-import Image from "next/image";
+import { languages } from "../../utils/languages";
 
 interface PreviewProps {
   preview: boolean;
@@ -22,6 +21,7 @@ interface PreviewProps {
 }
 
 const Preview = (props: PreviewProps) => {
+  const [language, setLanguage] = useState("");
   const createSpellRequest = useRequest({
     url: "/api/creation/spell",
     method: "post",
@@ -52,6 +52,12 @@ const Preview = (props: PreviewProps) => {
     },
   });
 
+  useEffect(() => {
+    props.tags.forEach((tag) => {
+      if (languages.includes(tag.toLowerCase())) setLanguage(tag.toLowerCase());
+    });
+  }, []);
+
   return (
     <>
       <div className="flex justify-center text-lg text-red-400 font-sc">
@@ -68,7 +74,7 @@ const Preview = (props: PreviewProps) => {
           } px-5 py-3 transition space-y-5`}
       >
         <div className="flex text-white text-2xl font-sc">
-          {props.title}
+          <div className="p-1">{props.title}</div>
           <div className="absolute right-5 flex items-center space-x-3">
             <div
               className="group cursor-pointer"
@@ -102,7 +108,7 @@ const Preview = (props: PreviewProps) => {
         </div>
         <SyntaxHighlighter
           className="rounded-md"
-          language="javascript"
+          language={language}
           style={nord}
         >
           {props.body}

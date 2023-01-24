@@ -8,6 +8,7 @@ module.exports = {
     fontFamily: {
       mg: ["MG"],
       sc: ["SC"],
+      dots: ["dotsfont"],
     },
     extend: {
       colors: {
