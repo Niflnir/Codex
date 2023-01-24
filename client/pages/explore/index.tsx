@@ -2,12 +2,12 @@ import { NextPage, NextPageContext } from "next";
 import Header from "../../components/header";
 import Sidebar from "../../components/Sidebar";
 import { useEffect, useState } from "react";
-import MyCodexIcon from "../../components/svg/MyCodexIcon";
 import useRequest from "../../hooks/use-request";
 import { Spell } from "../../utils/interfaces";
 import SpellLayout from "../../components/mycodex/SpellLayout";
 import Preview from "../../components/creation/Preview";
 import axios from "axios";
+import ExploreIcon from "../../components/svg/ExploreIcon";
 
 const MyCodex: NextPage = () => {
   const [id, setId] = useState<string>("");
@@ -47,11 +47,11 @@ const MyCodex: NextPage = () => {
   return (
     <div className="flex-col-center pb-32 relative min-h-screen bg-center bg-cover bg-black font-mg min-w-[700px]">
       <Header
-        icon={<MyCodexIcon className="w-7 h-7" pathClassName="fill-sec" />}
-        title="My Codex"
+        icon={<ExploreIcon className="w-7 h-7" pathClassName="fill-sec" />}
+        title="Explore"
       />
       <Sidebar />
-      <div className="absolute left-2 mt-28 text-4xl text-sec">Popular</div>
+      <div className="absolute left-2 mt-24 text-4xl text-sec">Popular</div>
       <div className={`flex flex-col absolute w-full h-1/5 top-1/6`}>
         {mySpells.map((spell) => (
           <SpellLayout

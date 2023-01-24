@@ -38,6 +38,22 @@ const MyCodex: NextPage = () => {
     },
   });
 
+  // const getCsvFile = async () => {
+  //   try {
+  //     const response = await axios.get("/api/mycode/csv", {
+  //       responseType: "blob", // important
+  //     });
+  //     const url = window.URL.createObjectURL(new Blob([response.data]));
+  //     const link = document.createElement("a");
+  //     link.href = url;
+  //     link.setAttribute("download", "report.csv");
+  //     document.body.appendChild(link);
+  //     link.click();
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+  //
   useEffect(() => {
     // Get all of the user's spells
     axios.get("/api/mycodex/favourites");
@@ -53,6 +69,7 @@ const MyCodex: NextPage = () => {
       />
       <Sidebar />
       <div className="flex space-x-64 mt-24 text-3xl">
+        {/* <button onClick={() => getCsvFile()}>csv</button> */}
         <div
           className={`${tab ? "text-sec" : "text-gray"} cursor-pointer`}
           onClick={() => setTab(true)}

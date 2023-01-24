@@ -5,10 +5,19 @@ import ExploreIcon from "./svg/ExploreIcon";
 import HomeIcon from "./svg/homeIcon";
 import { useState } from "react";
 import SidebarArrow from "./svg/SidebarArrow";
-import SettingsIcon from "./svg/SettingsIcon";
+import LogoutIcon from "./svg/LogoutIcon";
+import Router from "next/router";
+import useRequest from "../hooks/use-request";
 
 export const Sidebar = () => {
   const [show, setShow] = useState<boolean>(false);
+
+  const logoutRequest = useRequest({
+    url: "/api/auth/logout",
+    method: "get",
+    onSuccess: () => Router.push("/login"),
+  });
+
   return (
     <>
       <div
@@ -23,7 +32,7 @@ export const Sidebar = () => {
               pathClassName="group-hover:fill-sec"
             />
           }
-          url="/home"
+          clickHandler={() => Router.push("/home")}
         />
         <SidebarIcon
           title="Creation"
@@ -33,7 +42,7 @@ export const Sidebar = () => {
               pathClassName="group-hover:fill-sec"
             />
           }
-          url="/creation"
+          clickHandler={() => Router.push("/creation")}
         />
         <div className="pb-10">
           <div
@@ -52,7 +61,7 @@ export const Sidebar = () => {
               pathClassName="group-hover:fill-sec"
             />
           }
-          url="/mycodex"
+          clickHandler={() => Router.push("/mycodex")}
         />
         <SidebarIcon
           title="Explore"
@@ -62,18 +71,18 @@ export const Sidebar = () => {
               pathClassName="group-hover:fill-sec"
             />
           }
-          url="/explore"
+          clickHandler={() => Router.push("/explore")}
         />
         <div className="absolute bottom-2">
           <SidebarIcon
-            title="Settings"
+            title="Logout"
             icon={
-              <SettingsIcon
-                className="w-8 h-8"
-                pathClassName="group-hover:fill-sec"
+              <LogoutIcon
+                className="w-8 h-8 group-hover:fill-sec"
+                pathClassName=""
               />
             }
-            url="/settings"
+            clickHandler={logoutRequest.doRequest}
           />
         </div>
       </div>

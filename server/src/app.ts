@@ -6,11 +6,11 @@ import { currentUser, errorHandler, NotFoundError } from "@niftickets/common";
 
 import { signupRouter } from "./routes/auth/signup";
 import { loginRouter } from "./routes/auth/login";
+import { logoutRouter } from "./routes/auth/logout";
 import { getUserSpellsRouter } from "./routes/mycodex/getUserSpells";
 import { getFavouritesRouter } from "./routes/mycodex/getFavourites";
 import { favouriteSpellRouter } from "./routes/mycodex/favouriteSpell";
 import { createSpellRouter } from "./routes/creation/createSpell";
-import { logoutRouter } from "./routes/auth/logout";
 import { forgotPasswordRouter } from "./routes/auth/forgot-password";
 import { getTopSpellsRouter } from "./routes/explore/getTopSpells";
 import { verifyTokenRouter } from "./routes/auth/verify-token";

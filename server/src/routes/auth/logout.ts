@@ -2,9 +2,9 @@ import express from "express";
 
 const router = express.Router();
 
-router.post("/api/auth/logout", (req, res) => {
+router.get("/api/auth/logout", (req, res) => {
   req.session = null;
-  res.send({});
+  res.status(200).send({});
 });
 
 export { router as logoutRouter };

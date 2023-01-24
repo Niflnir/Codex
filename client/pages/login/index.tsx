@@ -9,7 +9,7 @@ const Login: NextPage = () => {
         <div className="flex items-center justify-center mb-12">
           <div className="text-4xl text-sec">CODEX</div>
         </div>
-        <div className="flex items-center justify-center mb-12">
+        <div className="flex items-center justify-center">
           <div className="text-2xl text-sec">the world of spells</div>
         </div>
         <LoginModal
@@ -17,6 +17,7 @@ const Login: NextPage = () => {
           url="/api/auth/login"
           redirectUrl="/home"
           password={true}
+          forgotPassword={true}
         />
         <div className="flex flex-col px-6 items-center">
           <div className="pt-20 text-gray-400 text-md space-x-1">

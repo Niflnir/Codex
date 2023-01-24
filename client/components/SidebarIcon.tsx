@@ -1,10 +1,9 @@
-import Router from "next/router";
-import { ReactElement } from "react";
+import { MouseEventHandler, ReactElement } from "react";
 
 interface SidebarIconProps {
   icon: ReactElement;
-  url: string;
   title: string;
+  clickHandler: MouseEventHandler<HTMLDivElement>;
 }
 
 export const SidebarIcon = (props: SidebarIconProps) => {
@@ -12,7 +11,8 @@ export const SidebarIcon = (props: SidebarIconProps) => {
     <div
       title={props.title}
       className="group cursor-pointer p-1 rounded-md hover:scale-125 hover:shadow-xl transition delay-50"
-      onClick={() => Router.push({ pathname: props.url })}
+      // onClick={() => Router.push({ pathname: props.url })}
+      onClick={props.clickHandler}
     >
       {props.icon}
     </div>

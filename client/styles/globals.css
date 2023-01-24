@@ -8,8 +8,8 @@
 }
 
 @font-face {
-  font-family: "MG";
-  src: url("../public/fonts/Megrim 500.ttf");
+  font-family: "dotsfont";
+  src: url("../public/fonts/dotsfont.ttf");
 }
 
 @layer components {

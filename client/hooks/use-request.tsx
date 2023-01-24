@@ -21,12 +21,10 @@ export default ({ url, method, body, onSuccess }: UseRequest) => {
     } catch (err: any) {
       console.log(err);
       setErrors(
-        <div>
-          <ul>
-            {err.response.data.errors.map((err: any) => (
-              <li key={err.message}>{err.message}</li>
-            ))}
-          </ul>
+        <div className="flex flex-col justify-center items-center font-sc text-red-400">
+          {err.response.data.errors.map((err: any) => (
+            <div key={err.message}>{err.message}</div>
+          ))}
         </div>
       );
     }
