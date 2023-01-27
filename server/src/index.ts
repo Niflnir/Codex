@@ -12,10 +12,14 @@ const start = async () => {
     throw new Error("MONGO_URI must be defined");
   }
   if (!process.env.USER_EMAIL) {
-    throw new Error("USER_EMAIL must be defined");
+    console.log(
+      "USER_EMAIL not defined, forgot password function will not work"
+    );
   }
   if (!process.env.USER_PASSWORD) {
-    throw new Error("USER_PASSWORD must be defined");
+    console.log(
+      "USER_PASSWORD not defined, forgot password function will not work"
+    );
   }
   try {
     await mongoose.connect(process.env.MONGO_URI);
