@@ -1,7 +1,7 @@
 # Codex
 
-#### A simple application to create and share coding tips!
-
+#### A simple application to create and share coding tips with other developers!
+#### www.codex-app.codes
 ## How to use
 
 ```bash
@@ -14,10 +14,10 @@ $ git checkout dev
 # Enter env variables in docker-compose file
   JWT_KEY: yourJWTkey
   MONGO_URI: yourMongoUri
-  # USER_EMAIL and USER_PASSWORD can be skipped
+  # USER_EMAIL and USER_PASSWORD can be empty
   # but forgot password feature will not work
   USER_EMAIL: yourGmail
-  USER_PASSWORD: yourGeneratedGoogleAppPassword
+  USER_PASSWORD: yourGeneratedGoogleAppPassword # Need to enable 2FA on google account and generate an app password
 
 # Run docker-compose
 $ docker-compose up -f docker-compose.yml up
@@ -25,16 +25,27 @@ $ docker-compose up -f docker-compose.yml up
 
 ## Features
 
-### Login/Create Account
+### *Login / Create Account*
 
-- Create your account with an email and password
+- Create account with email and password
 - Login with email and password
+
 ![Login Screen](./screenshots/LoginScreen.jpg)
-### Creation - Create a code spell
+<p align="center"><em>Login Screen with email and password</em></p>
 
-1. Title
-2. Tags (optional but recommended)
-3. Body (Enter your code)
-4. Preview
+### *Creation - Creating a Code Spell*
 
-#### The code provided in the body will be syntax highlighted
+A Code Spell consists of three sections:
+- Title
+- Tags (optional but recommended)
+- Body 
+
+![Creation Screen](./screenshots/CreationScreen.jpg)
+<p align="center"><em>Code Spell form with title, tag and code in body</em></p>
+
+<p align="justify">After filling in the details, click on Preview. A preview of the Code Spell will be displayed. The code in the body will be syntax highlighted based on Tags provided. Click on Create after you are done reviewing the code spell.</p>
+
+![Creation Preview Screen](./screenshots/CreationPreview.jpg)
+<p align="center"><em>Preview of Code Spell with python code and python tag</em></p>
+
+
