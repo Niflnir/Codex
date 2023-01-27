@@ -8,10 +8,10 @@
 # Clone this repository
 $ git clone https://github.com/Niflnir/Codex.git
 
-# Switch to dev branch
+# Checkout dev branch
 $ git checkout dev
 
-# Enter env variables in docker-compose file
+# Edit env variables in docker-compose file
   JWT_KEY: yourJWTkey
   MONGO_URI: yourMongoUri
   # USER_EMAIL and USER_PASSWORD can be empty
@@ -49,7 +49,23 @@ A Code Spell consists of three sections:
 <p align="center"><em>Preview of Code Spell with python code and python tag</em></p>
 
 ### *My Codex - View Your Code Spells*
-#### My Spells: list of Code Spells you have created
+There are 2 tabs:
+- My Spells (list of Code Spells user has created)
+- Favourites (list of Code Spells user has favourited)
 
-#### Favourites list of Code Spells you have favourited
+Code Spells are simplified, showing only the **Title**, **Tags** and the number of **Favourites**. Details of the Code Spell will be displayed upon clicking on it. User's can **Favourite** or **Unfavourite** Code Spells by toggling the :blue_heart: icon.
 
+![My Spells Screen](./screenshots/MySpellsScreen.jpg)
+<p align="center"><em>My Spells tab showing user's Code Spells</em></p>
+
+<br/>
+
+![Favourites Screen](./screenshots/FavouritesScreen.jpg)
+<p align="center"><em>Favourites tab showing user's favourited Code Spells</em></p>
+
+### *Explore- View Other User's Code Spells*
+This screen will show the **Newest** and the most **Popular** Code Spells created by all the users. Users can **Favourite** or **Unfavourite** Code Spells here as well.
+
+![Explore Screen](./screenshots/ExploreScreen.jpg)
+
+Thanks for reading!!! :smile:
