@@ -2,7 +2,7 @@
 
 #### A simple application to create and share coding tips with other developers!
 
-#### www.codex-app.codes
+#### Hosted on: www.codex-app.codes
 
 ## How to use
 
@@ -35,6 +35,12 @@ $ docker-compose up -f docker-compose.yml up
 ![Login Screen](./screenshots/LoginScreen.jpg)
 
 <p align="center"><em>Login Screen with email and password</em></p>
+
+### _Home - Navigation_
+Users will be redirected to this page after **login**. Users can navigate to **Creation**, **MyCodex** or **Explore** by clicking on the respective images or through the **Sidebar** icons. The icon at the bottom of the **Sidebar** is for users to **Logout**.
+
+![Home Screen](./screenshots/HomeScreen.jpg)
+<p align="center"><em>Home screen with Sidebar open</em></p>
 
 ### _Creation - Creating a Code Spell_
 
@@ -78,5 +84,16 @@ Code Spells are simplified, showing only the **Title**, **Tags** and the number 
 This screen will show the **Newest** and the most **Popular** Code Spells created by all the users. Users can **Favourite** or **Unfavourite** Code Spells here as well.
 
 ![Explore Screen](./screenshots/ExploreScreen.jpg)
+<p align="center"><em>Explore screen showing the newest and most popular Code Spells</em></p>
+
+## Technologies
+### Frontend: NextJS, TailwindCSS
+### Backend: ExpressJS, MongoDB, Nginx
+### Tools: Docker
+
+<br/>
+<br/> 
 
 Thanks for reading!!! :smile:
+
+
