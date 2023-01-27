@@ -37,7 +37,7 @@ $ docker-compose up -f docker-compose.yml up
 <p align="center"><em>Login Screen with email and password</em></p>
 
 ### _Home - Navigation_
-Users will be redirected to this page after **login**. Users can navigate to **Creation**, **MyCodex** or **Explore** by clicking on the respective images or through the **Sidebar** icons. The icon at the bottom of the **Sidebar** is for users to **Logout**.
+Users will be redirected to this page after **Login**. Users can navigate to **Creation**, **MyCodex** or **Explore** by clicking on the respective images or through the **Sidebar** icons. The icon at the bottom of the **Sidebar** is for users to **Logout**.
 
 ![Home Screen](./screenshots/HomeScreen.jpg)
 <p align="center"><em>Home screen with Sidebar open</em></p>
@@ -95,5 +95,3 @@ This screen will show the **Newest** and the most **Popular** Code Spells create
 <br/> 
 
 Thanks for reading!!! :smile:
-
-
