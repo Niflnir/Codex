@@ -29,7 +29,7 @@ $ docker-compose up -f docker-compose.yml up
 
 - Create your account with an email and password
 - Login with email and password
-
+![Login Screen](./screenshots/LoginScreen.jpg)
 ### Creation - Create a code spell
 
 1. Title
