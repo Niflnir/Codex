@@ -43,9 +43,13 @@ A Code Spell consists of three sections:
 ![Creation Screen](./screenshots/CreationScreen.jpg)
 <p align="center"><em>Code Spell form with title, tag and code in body</em></p>
 
-<p align="justify">After filling in the details, click on Preview. A preview of the Code Spell will be displayed. The code in the body will be syntax highlighted based on Tags provided. Click on Create after you are done reviewing the code spell.</p>
+<p align="justify">After filling in the details, click on <b>Preview</b> and a preview of the Code Spell will be displayed. The code in the body will be <b>syntax highlighted</b> based on <b>Tags</b> provided. Click on <b>Create</b> after you are done reviewing the Code Spell.</p>
 
 ![Creation Preview Screen](./screenshots/CreationPreview.jpg)
 <p align="center"><em>Preview of Code Spell with python code and python tag</em></p>
 
+### *My Codex - View Your Code Spells*
+#### My Spells: list of Code Spells you have created
+
+#### Favourites list of Code Spells you have favourited
 
