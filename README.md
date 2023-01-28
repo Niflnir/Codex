@@ -10,8 +10,8 @@
 # Clone this repository
 $ git clone https://github.com/Niflnir/Codex.git
 
-# Checkout local branch
-$ git checkout local
+# Checkout dev branch
+$ git checkout dev
 
 # Edit env variables in docker-compose file
   JWT_KEY: yourJWTkey
