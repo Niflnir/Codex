@@ -2,8 +2,6 @@
 
 #### A simple application to create and share coding tips with other developers!
 
-#### Hosted on: www.codex-app.codes
-
 ## How to use
 
 ```bash
